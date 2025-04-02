@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\CareDaily;
+use App\Entity\Owner;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CareDaily>
+ * @extends ServiceEntityRepository<Owner>
  */
-class CareDailyRepository extends ServiceEntityRepository
+class OwnerRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CareDaily::class);
+        parent::__construct($registry, Owner::class);
     }
 
     //    /**
-    //     * @return CareDaily[] Returns an array of CareDaily objects
+    //     * @return Owner[] Returns an array of Owner objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
+    //            ->orderBy('o.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?CareDaily
+    //    public function findOneBySomeField($value): ?Owner
     //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

@@ -26,6 +26,18 @@ class Care
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $vaccin_date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'care')]
+    private ?Animal $animal = null;
+
+    #[ORM\Column]
+    private ?int $weightTracking = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $food = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $behaviour = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +87,54 @@ class Care
     public function setVaccinDate(\DateTimeInterface $vaccin_date): static
     {
         $this->vaccin_date = $vaccin_date;
+
+        return $this;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(?Animal $animal): static
+    {
+        $this->animal = $animal;
+
+        return $this;
+    }
+
+    public function getWeightTracking(): ?int
+    {
+        return $this->weightTracking;
+    }
+
+    public function setWeightTracking(int $weightTracking): static
+    {
+        $this->weightTracking = $weightTracking;
+
+        return $this;
+    }
+
+    public function getFood(): ?string
+    {
+        return $this->food;
+    }
+
+    public function setFood(string $food): static
+    {
+        $this->food = $food;
+
+        return $this;
+    }
+
+    public function getBehaviour(): ?string
+    {
+        return $this->behaviour;
+    }
+
+    public function setBehaviour(string $behaviour): static
+    {
+        $this->behaviour = $behaviour;
 
         return $this;
     }
