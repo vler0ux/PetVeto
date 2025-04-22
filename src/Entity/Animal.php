@@ -32,7 +32,7 @@ class Animal
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $owner = null;
+    private ?User $user = null;
 
     /**
      * @var Collection<int, Care>
@@ -94,14 +94,14 @@ class Animal
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getUser(): ?User
     {
-        return $this->owner;
+        return $this->user;
     }
 
-    public function setOwner(?User $owner): static
+    public function setUser(?User $user): static
     {
-        $this->owner = $owner;
+        $this->user = $user;
         return $this;
     }
 

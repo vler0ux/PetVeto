@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Animal::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Animal::class)]
     private Collection $animals;
 
     public function __construct()
@@ -112,7 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->animals->contains($animal)) {
             $this->animals[] = $animal;
-            $animal->setOwner($this);
+            $animal->setUser($this);
         }
 
         return $this;
@@ -121,8 +121,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeAnimal(Animal $animal): static
     {
         if ($this->animals->removeElement($animal)) {
-            if ($animal->getOwner() === $this) {
-                $animal->setOwner(null);
+            if ($animal->getUser() === $this) {
+                $animal->setUser(null);
             }
         }
 
