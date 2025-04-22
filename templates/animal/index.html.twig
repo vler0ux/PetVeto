@@ -3,18 +3,49 @@
 {% block title %}Mes animaux - PetVeto{% endblock %}
 
 {% block body %}
-    <h1>Mes animaux</h1>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Bienvenue {{ app.user.firstname }} 👋</h2>
+        <h1 class="display-6">Mes animaux</h1>
+    </div>
 
     {% if animals is empty %}
-        <p>Aucun animal enregistré pour le moment.</p>
+        <div class="alert alert-info text-center">
+            <p>Aucun animal enregistré pour le moment 🐾</p>
+            <p>Cliquez sur le bouton ci-dessous pour en ajouter un.</p>
+        </div>
     {% else %}
-        <ul>
+        <div class="row justify-content-center">
             {% for animal in animals %}
-                <li>
-                    <strong>{{ animal.nom }}</strong> - {{ animal.espece }}</li>
+                <div class="col-sm-10 col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <img src="https://place-puppy.com/400x250" class="card-img-top" alt="Photo de {{ animal.name }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-semibold">{{ animal.name }}</h5>
+                            <p class="card-text text-muted">{{ animal.species }}</p>
+                            <div class="d-grid gap-2">
+                                <a href="#" class="btn btn-outline-secondary disabled" aria-disabled="true">
+                                    🩺 Voir les soins
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
 
-    <a href="{{ path('animal_new') }}" class="btn btn-primary">Ajouter un animal</a>
+    <div class="row mt-5 justify-content-center gap-3">
+        <div class="col-10 col-md-4 col-lg-3 d-grid">
+            <a href="{{ path('animal_new') }}" class="btn btn-success btn-lg">
+                ➕ Ajouter un animal
+            </a>
+        </div>
+        <div class="col-10 col-md-4 col-lg-3 d-grid">
+            <a href="{{ path('app_home') }}" class="btn btn-outline-primary btn-lg">
+                🏠 Retour à l'accueil
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

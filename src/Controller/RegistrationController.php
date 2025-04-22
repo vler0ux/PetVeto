@@ -49,8 +49,8 @@ class RegistrationController extends AbstractController
             );
 
             // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_home');
+            $this->addFlash('success', 'Bienvenue sur PetVeto ! Vous êtes bien inscrite 🐾');
+            return $this->redirectToRoute('app_animaux');
         }
 
         return $this->render('registration/register.html.twig', [

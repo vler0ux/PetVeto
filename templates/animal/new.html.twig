@@ -1,15 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Ajouter un animal {% endblock %}
+{% block title %}Ajouter un animal - PetVeto{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un nouvel animal</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white text-center">
+                    <h2 class="mb-0">Ajouter un nouvel animal 🐾</h2>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.name) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.species) }}
+                            {{ form_widget(form.species, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.species) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.birthday) }}
+                            {{ form_widget(form.birthday, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.birthday) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.description) }}
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.description) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.vaccination) }}
+                            {{ form_widget(form.vaccination, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.vaccination) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.weight) }}
+                            {{ form_widget(form.weight, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.weight) }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">✅ Enregistrer</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
 
-     {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.species) }}
-        {{ form_row(form.birthday) }}
-        {{ form_row(form.description) }}
-        <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
+            <div class="text-center mt-3">
+                <a href="{{ path('app_home') }}" class="btn btn-outline-primary">🏠 Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -21,6 +21,7 @@ class AnimalController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $animal->setUser($this->getUser());
             $entityManager->persist($animal);
             $entityManager->flush();
             return $this->redirectToRoute('app_animaux');
@@ -28,6 +29,7 @@ class AnimalController extends AbstractController
 
         return $this->render('animal/new.html.twig', [
             'form' => $form->createView(),
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -35,10 +37,11 @@ class AnimalController extends AbstractController
     public function index(AnimalRepository $animalRepository): Response
     {
         $user = $this->getUser();
-        $animals = $animalRepository->findBy(['owner' => $user]);
+        $animals = $animalRepository->findBy(['user' => $user]);
 
         return $this->render('animal/index.html.twig', [
             'animals' => $animals,
+            'user' => $user,
         ]);
     }
 

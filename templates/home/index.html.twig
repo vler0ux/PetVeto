@@ -3,47 +3,65 @@
 {% block title %}Bienvenue chez PetVeto 🐾{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Bienvenue sur PetVeto 🐾</h1>
-
-        <!-- Présentation du service -->
-        <section>
-            <h2>Pourquoi PetVeto ?</h2>
-            <p>Suivi des soins vétérinaires, carnet de santé digital, rappels vaccinaux automatiques, tout est centralisé pour le bien-être de vos animaux !</p>
-        </section>
-
-        <!-- Témoignages -->
-        <section>
-            <h2>Ils nous font confiance 🐕</h2>
-            <blockquote>
-                "Grâce à PetVeto, je n'oublie plus jamais les vaccins de mon chat !" – Sophie & Minette
-            </blockquote>
-            <blockquote>
-                "Un outil simple et pratique, même mon lapin est fan 🐰" – Jules & Carotte
-            </blockquote>
-        </section>
-
-        <!-- Accès rapide -->
-        <section>
-            <h2>Accès rapide</h2>
-            <ul>
-                <li><a href="{{ path('app_animaux') }}">Voir mes animaux</a></li>
-                <li><a href="{{ path('app_soins') }}">Consulter les soins</a></li>
-          
-        </section>
-
-        {% for flash in app.session.get('_flashes') ?? [] %}
-            <div class="alert alert-{{ flash.type }}">
-                {{ flash.message }}
-            </div>
-        {% endfor %}
-
-
-        <!-- Call to Action -->
-        <section>
-            <h2>Rejoignez-nous !</h2>
-            {# <a class="btn btn-primary" href="{{ path('app_register') }}">Créer un compte</a> #}
-            <a class="btn btn-secondary" href="{{ path('app_login') }}">Se connecter</a>
-        </section>
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">Bienvenue sur <span class="text-success">PetVeto</span> 🐾</h1>
+        <p class="lead">Votre compagnon mérite le meilleur suivi santé 💚</p>
     </div>
+
+    <!-- Flash messages -->
+    {% for flash in app.session.get('_flashes') ?? [] %}
+        <div class="alert alert-{{ flash.type }} mt-3">
+            {{ flash.message }}
+        </div>
+    {% endfor %}
+    <!-- Présentation du service -->
+    <section class="mb-5">
+        <h2 class="h4 text-success mb-3">Pourquoi PetVeto ?</h2>
+        <p class="fs-5">
+            Suivi des soins vétérinaires, carnet de santé digital, rappels vaccinaux automatiques…
+            tout est centralisé pour le bien-être de vos animaux !
+        </p>
+    </section>
+
+    <!-- Témoignages -->
+    <section class="mb-5">
+        <h2 class="h4 text-success mb-3">Ils nous font confiance 🐕</h2>
+        <figure class="blockquote">
+            <p>"Grâce à PetVeto, je n'oublie plus jamais les vaccins de mon chat !"</p>
+            <figcaption class="blockquote-footer">Sophie & Minette</figcaption>
+        </figure>
+        <figure class="blockquote">
+            <p>"Un outil simple et pratique, même mon lapin est fan 🐰"</p>
+            <figcaption class="blockquote-footer">Jules & Carotte</figcaption>
+        </figure>
+    </section>
+
+    <!-- Accès rapide -->
+    <section class="mb-5">
+        <h2 class="h4 text-success mb-3">Accès rapide</h2>
+        <div class="row g-3">
+            <div class="col-12 col-sm-6 col-md-4 d-grid">
+                <a href="{{ path('app_animaux') }}" class="btn btn-outline-primary btn-lg">
+                    🐾 Voir mes animaux
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 d-grid">
+                <a href="{{ path('app_soins') }}" class="btn btn-outline-secondary btn-lg">
+                    💊 Consulter les soins
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Call to Action -->
+    <section class="mt-5 text-center">
+        <h2 class="h4 text-success mb-3">Rejoignez-nous !</h2>
+        <a class="btn btn-success btn-lg me-2" href="{{ path('app_login') }}">
+            🔐 Se connecter
+        </a>
+      
+    </section>
+</div>
 {% endblock %}
