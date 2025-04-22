@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Care;
+use App\Entity\Soin;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Care>
+ * @extends ServiceEntityRepository<Soin>
  */
-class CareRepository extends ServiceEntityRepository
+class SoinRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Care::class);
+        parent::__construct($registry, Soin::class);
     }
 
     //    /**
-    //     * @return Care[] Returns an array of Care objects
+    //     * @return Soin[] Returns an array of Soin objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class CareRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Care
+    //    public function findOneBySomeField($value): ?Soin
     //    {
     //        return $this->createQueryBuilder('c')
     //            ->andWhere('c.exampleField = :val')

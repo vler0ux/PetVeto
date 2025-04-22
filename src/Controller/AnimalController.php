@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\AnimalRepository;
 
 class AnimalController extends AbstractController
 {
@@ -22,10 +23,23 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($animal);
             $entityManager->flush();
+            return $this->redirectToRoute('app_animaux');
         }
 
-        return $this->render('/animal.html.twig', [
+        return $this->render('animal/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+
+        #[Route('/animaux', name: 'app_animaux')]
+    public function index(AnimalRepository $animalRepository): Response
+    {
+        $user = $this->getUser();
+        $animals = $animalRepository->findBy(['owner' => $user]);
+
+        return $this->render('animal/index.html.twig', [
+            'animals' => $animals,
+        ]);
+    }
+
 }

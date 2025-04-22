@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes soins - PetVeto{% endblock %}
+
+{% block body %}
+    <h1>Mes soins vétérinaires 💉</h1>
+
+    {% if soins is empty %}
+        <p>Aucun soin enregistré.</p>
+    {% else %}
+        <ul>
+            {% for soin in soins %}
+                <li>
+                    {{ soin.type }} pour {{ soin.animal.nom }} – le {{ soin.date|date('d/m/Y') }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

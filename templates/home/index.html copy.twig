@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard - Petveto{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>🐾 Bienvenue sur Petveto</h1>
+        <p>Voici la liste des animaux enregistrés :</p>
+
+        {% if animals is not empty %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Espèce</th>
+                        <th>Date de naissance</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for animal in animals %}
+                        <tr>
+                            <td>{{ animal.name }}</td>
+                            <td>{{ animal.species }}</td>
+                            <td>{{ animal.birthday|date('d/m/Y') }}</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-outline-primary disabled">Voir les soins</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucun animal pour l’instant 🐾</p>
+        {% endif %}
+    </div>
+{% endblock %}

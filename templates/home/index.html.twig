@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue chez PetVeto 🐾{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Bienvenue sur PetVeto 🐾</h1>
+
+        <!-- Présentation du service -->
+        <section>
+            <h2>Pourquoi PetVeto ?</h2>
+            <p>Suivi des soins vétérinaires, carnet de santé digital, rappels vaccinaux automatiques, tout est centralisé pour le bien-être de vos animaux !</p>
+        </section>
+
+        <!-- Témoignages -->
+        <section>
+            <h2>Ils nous font confiance 🐕</h2>
+            <blockquote>
+                "Grâce à PetVeto, je n'oublie plus jamais les vaccins de mon chat !" – Sophie & Minette
+            </blockquote>
+            <blockquote>
+                "Un outil simple et pratique, même mon lapin est fan 🐰" – Jules & Carotte
+            </blockquote>
+        </section>
+
+        <!-- Accès rapide -->
+        <section>
+            <h2>Accès rapide</h2>
+            <ul>
+                <li><a href="{{ path('app_animaux') }}">Voir mes animaux</a></li>
+                <li><a href="{{ path('app_soins') }}">Consulter les soins</a></li>
+          
+        </section>
+
+        {% for flash in app.session.get('_flashes') ?? [] %}
+            <div class="alert alert-{{ flash.type }}">
+                {{ flash.message }}
+            </div>
+        {% endfor %}
+
+
+        <!-- Call to Action -->
+        <section>
+            <h2>Rejoignez-nous !</h2>
+            {# <a class="btn btn-primary" href="{{ path('app_register') }}">Créer un compte</a> #}
+            <a class="btn btn-secondary" href="{{ path('app_login') }}">Se connecter</a>
+        </section>
+    </div>
+{% endblock %}

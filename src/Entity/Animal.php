@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
+use App\Entity\Care;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 class Animal
@@ -28,14 +30,20 @@ class Animal
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'animal')]
-    private ?Owner $owner = null;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $owner = null;
 
     /**
      * @var Collection<int, Care>
      */
     #[ORM\OneToMany(targetEntity: Care::class, mappedBy: 'animal', orphanRemoval: true)]
     private Collection $care;
+
+    public function __construct()
+    {
+        $this->care = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -50,7 +58,6 @@ class Animal
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -62,7 +69,6 @@ class Animal
     public function setSpecies(string $species): static
     {
         $this->species = $species;
-
         return $this;
     }
 
@@ -74,7 +80,6 @@ class Animal
     public function setBirthday(\DateTimeInterface $birthday): static
     {
         $this->birthday = $birthday;
-
         return $this;
     }
 
@@ -86,31 +91,29 @@ class Animal
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
-    public function getOwner(): ?Owner
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?Owner $owner): static
+    public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
-
         return $this;
     }
 
     /**
-     * @return Collection<int, care>
+     * @return Collection<int, Care>
      */
     public function getCare(): Collection
     {
         return $this->care;
     }
 
-    public function addCare(care $care): static
+    public function addCare(Care $care): static
     {
         if (!$this->care->contains($care)) {
             $this->care->add($care);
@@ -120,10 +123,9 @@ class Animal
         return $this;
     }
 
-    public function removeCare(care $care): static
+    public function removeCare(Care $care): static
     {
         if ($this->care->removeElement($care)) {
-            // set the owning side to null (unless already changed)
             if ($care->getAnimal() === $this) {
                 $care->setAnimal(null);
             }
