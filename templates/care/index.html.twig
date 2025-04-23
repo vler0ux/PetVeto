@@ -5,15 +5,20 @@
 {% block body %}
     <h1>Mes soins vétérinaires 💉</h1>
 
-    {% if soins is empty %}
+    {% if cares is empty %}
         <p>Aucun soin enregistré.</p>
     {% else %}
         <ul>
-            {% for soin in soins %}
+            {% for care in cares %}
                 <li>
-                    {{ soin.type }} pour {{ soin.animal.nom }} – le {{ soin.date|date('d/m/Y') }}
+                    {{ care.type }} pour {{ care.animal.nom }} – le {{ care.date|date('d/m/Y') }}
                 </li>
             {% endfor %}
         </ul>
+
+        <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
+    ⬅️ Retour à l’accueil
+</a>
+
     {% endif %}
 {% endblock %}

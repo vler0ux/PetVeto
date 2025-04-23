@@ -1,23 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer un compte{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="card shadow p-4 w-100" style="max-width: 600px;">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-3">
+                    <i class="bi bi-person-plus-fill me-2"></i>Créer un compte
+                </h1>
+                <p class="text-center text-muted mb-4">Rejoignez-nous en quelques secondes !</p>
 
-    <h1>Register</h1>
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                {% endfor %}
 
-    {{ form_errors(registrationForm) }}
+                {{ form_start(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.lastname, {
+                            label: 'Nom'
+                        }) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.firstname, {
+                            label: 'Prénom'
+                        }) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.phone, {
+                            label: 'Téléphone'
+                        }) }}
+                    </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                    <h5 class="mt-4 mb-2">Adresse</h5>
+
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.rue, {
+                            label: 'Rue et numéro'
+                        }) }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(registrationForm.codePostal, {
+                                label: 'Code postal'
+                            }) }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(registrationForm.ville, {
+                                label: 'Ville'
+                            }) }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.email, {
+                            label: 'Email'
+                        }) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.plainPassword, {
+                            label: 'Mot de passe'
+                        }) }}
+                    </div>
+                    <div class="form-check mb-3">
+                        {{ form_row(registrationForm.agreeTerms, {
+                            label: 'J’accepte les conditions'
+                        }) }}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">S'inscrire</button>
+                    </div>
+
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

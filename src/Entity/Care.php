@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\AnimalRepository;
 use App\Repository\CareRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,22 +16,23 @@ class Care
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $vaccins = null;
+    private ?string $vaccinations = null;
 
     #[ORM\Column(length: 255)]
     private ?string $treatment = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $veto_examination = null;
+    private ?\DateTimeInterface $examDate= null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $vaccin_date = null;
+    private ?\DateTimeInterface $vaccinationDate = null;
 
-    #[ORM\ManyToOne(inversedBy: 'care')]
+    #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'soins')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Animal $animal = null;
 
     #[ORM\Column]
-    private ?int $weightTracking = null;
+    private ?int $weight = null;
 
     #[ORM\Column(length: 255)]
     private ?string $food = null;
@@ -38,19 +40,22 @@ class Care
     #[ORM\Column(length: 255)]
     private ?string $behaviour = null;
 
+    #[ORM\ManyToOne(inversedBy: 'cares')]
+    private ?veto $veto = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getVaccins(): ?string
+    public function getVaccinations(): ?string
     {
-        return $this->vaccins;
+        return $this->vaccinations;
     }
 
-    public function setVaccins(string $vaccins): static
+    public function setvaccinations(string $vaccinations): static
     {
-        $this->vaccins = $vaccins;
+        $this->vaccinations = $vaccinations;
 
         return $this;
     }
@@ -67,26 +72,26 @@ class Care
         return $this;
     }
 
-    public function getVetoExamination(): ?\DateTimeInterface
+    public function getexamDate(): ?\DateTimeInterface
     {
-        return $this->veto_examination;
+        return $this->examDate;
     }
 
-    public function setVetoExamination(\DateTimeInterface $veto_examination): static
+    public function setexamDate(\DateTimeInterface $examDate): static
     {
-        $this->veto_examination = $veto_examination;
+        $this->examDate= $examDate;
 
         return $this;
     }
 
-    public function getVaccinDate(): ?\DateTimeInterface
+    public function getVaccinationDate(): ?\DateTimeInterface
     {
-        return $this->vaccin_date;
+        return $this->vaccinationDate;
     }
 
-    public function setVaccinDate(\DateTimeInterface $vaccin_date): static
+    public function setVaccinationDate(\DateTimeInterface $vaccinationDate): static
     {
-        $this->vaccin_date = $vaccin_date;
+        $this->vaccinationDate = $vaccinationDate;
 
         return $this;
     }
@@ -103,14 +108,14 @@ class Care
         return $this;
     }
 
-    public function getWeightTracking(): ?int
+    public function getWeight(): ?int
     {
-        return $this->weightTracking;
+        return $this->weight;
     }
 
-    public function setWeightTracking(int $weightTracking): static
+    public function setWeight(int $weight): static
     {
-        $this->weightTracking = $weightTracking;
+        $this->weight = $weight;
 
         return $this;
     }
@@ -135,6 +140,18 @@ class Care
     public function setBehaviour(string $behaviour): static
     {
         $this->behaviour = $behaviour;
+
+        return $this;
+    }
+
+    public function getVeto(): ?veto
+    {
+        return $this->veto;
+    }
+
+    public function setVeto(?veto $veto): static
+    {
+        $this->veto = $veto;
 
         return $this;
     }

@@ -8,6 +8,12 @@
         <h1 class="display-5 fw-bold">Bienvenue sur <span class="text-success">PetVeto</span> 🐾</h1>
         <p class="lead">Votre compagnon mérite le meilleur suivi santé 💚</p>
     </div>
+    {% if app.user %}
+    <div class="alert alert-success">
+        Bonjour {{ app.user.firstname}}! Vous êtes connecté sur VetoPet !
+    </div>
+{% endif %}
+
 
     <!-- Flash messages -->
     {% for flash in app.session.get('_flashes') ?? [] %}
@@ -47,7 +53,7 @@
                 </a>
             </div>
             <div class="col-12 col-sm-6 col-md-4 d-grid">
-                <a href="{{ path('app_soins') }}" class="btn btn-outline-secondary btn-lg">
+                <a href="{{ path('app_cares') }}" class="btn btn-outline-secondary btn-lg">
                     💊 Consulter les soins
                 </a>
             </div>

@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Animal::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Animal::class, orphanRemoval: true)]
     private Collection $animals;
 
     #[ORM\Column(length: 255)]
@@ -45,8 +45,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $phone = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $adress = null;
+    #[ORM\Column(length: 255)]
+    private ?string $rue = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $codepostal = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
 
     public function __construct()
     {
@@ -120,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->animals;
     }
 
-    public function addAnimal(Animal $animal): static
+    public function addAnimal(Animal $animal): self
     {
         if (!$this->animals->contains($animal)) {
             $this->animals[] = $animal;
@@ -130,7 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeAnimal(Animal $animal): static
+    public function removeAnimal(Animal $animal): self
     {
         if ($this->animals->removeElement($animal)) {
             if ($animal->getUser() === $this) {
@@ -177,14 +183,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAdress(): ?string
+
+    public function getRue(): ?string
     {
-        return $this->adress;
+        return $this->rue;
     }
 
-    public function setAdress(?string $adress): static
+    public function setRue(string $rue): static
     {
-        $this->adress = $adress;
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    public function getCodepostal(): ?string
+    {
+        return $this->codepostal;
+    }
+
+    public function setCodepostal(string $codepostal): static
+    {
+        $this->codepostal = $codepostal;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): static
+    {
+        $this->ville = $ville;
 
         return $this;
     }

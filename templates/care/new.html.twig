@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau soin{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4">🩺 Nouveau soin</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <button class="btn btn-primary mt-3">Enregistrer le soin</button>
+
+            <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
+    ⬅️ Retour à l’accueil
+</a>
+
+        {{ form_end(form) }}
+    </div>
+    {% if form.veto is defined and form.veto.vars.choices is empty %}
+    <div class="alert alert-warning">
+        ⚠️ Aucun vétérinaire enregistré. <a href="{{ path('veto_new') }}">Ajouter un vétérinaire</a>
+    </div>
+    <div class="mb-3">
+        <a href="{{ path('veto_new') }}" class="btn btn-outline-primary">
+            ➕ Ajouter un vétérinaire
+        </a>
+    </div>
+
+    <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
+    ⬅️ Retour à l’accueil
+</a>
+
+{% endif %}
+
+{% endblock %}

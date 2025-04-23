@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 
 class AnimalType extends AbstractType
@@ -30,12 +31,17 @@ class AnimalType extends AbstractType
             'label' => 'Date de naissance',
             'widget' => 'single_text',
         ])
+        ->add('vaccination', TextType::class, [
+            'label' => 'Vaccination',
+            'attr' => ['placeholder' => 'Entrez le statut de vaccination'],
+        ])
+        ->add('weight', NumberType::class, [
+            'label' => 'Poids (kg)',
+            'required' => false,
+        ])
         ->add('description', TextareaType::class, [
             'label' => 'Description',
             'attr' => ['placeholder' => 'Décrivez l\'animal'],
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Enregistrer',
         ]);
     }
 

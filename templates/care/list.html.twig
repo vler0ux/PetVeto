@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des soins{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">🩺 Liste des soins</h1>
+
+    {% if cares is not empty %}
+        <div class="row">
+            {% for care in cares %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Animal : {{ care.animal.name }}</h5>
+                            <ul class="list-unstyled">
+                                <li><strong>Vaccins :</strong> {{ care.vaccins }}</li>
+                                <li><strong>Traitement :</strong> {{ care.treatment }}</li>
+                                <li><strong>Date vaccination :</strong> {{ care.vaccin_date|date('d/m/Y') }}</li>
+                                <li><strong>Date examen véto :</strong> {{ care.veto_examination|date('d/m/Y') }}</li>
+                                <li><strong>Poids :</strong> {{ care.weightTracking }} kg</li>
+                                <li><strong>Alimentation :</strong> {{ care.food }}</li>
+                                <li><strong>Comportement :</strong> {{ care.behaviour }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">Aucun care enregistré pour le moment.</div>
+    {% endif %}
+
+    <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
+    ⬅️ Retour à l’accueil
+</a>
+
+</div>
+{% endblock %}
