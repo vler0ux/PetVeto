@@ -14,6 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CareController extends AbstractController
 {
+    // listes des soins
+    #[Route('/cares', name: 'app_cares')]
+        public function index(CareRepository $careRepository): Response
+        {
+            $care = $careRepository->findAll();
+
+            return $this->render('care/index.html.twig', [
+                'cares' => $care,
+            ]);
+        }
+
+    // ajout d'un soin
     #[Route('/care/new', name: 'care_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -35,7 +47,6 @@ class CareController extends AbstractController
                 }
         }
         }
-
         $form = $this->createForm(CareType::class, $care);
         $form->handleRequest($request);
 
@@ -62,16 +73,7 @@ class CareController extends AbstractController
         ]);
     }
 
-    #[Route('/cares', name: 'app_cares')]
-        public function index(CareRepository $careRepository): Response
-        {
-            $care = $careRepository->findAll();
-
-            return $this->render('care/index.html.twig', [
-                'cares' => $care,
-            ]);
-        }
-
+    // recupere le soin d'un animal
     #[Route('/animal/{id}/cares', name: 'animal_care_list')]
         public function listCare(Animal $animal): Response
         {

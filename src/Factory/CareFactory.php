@@ -32,13 +32,14 @@ final class CareFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'behaviour' => self::faker()->text(255),
-            'food' => self::faker()->sentence(1),
-            'treatment' => self::faker()->text(255),
-            'vaccin_date' => self::faker()->dateTime(),
-            'vaccins' => self::faker()->text(255),
-            'veto_examination' => self::faker()->dateTime(),
-            'weightTracking' => self::faker()->randomNumber(),
+            'examDate' => self::faker()->dateTimeBetween('-1 year', 'now'),
+            'vaccinationDate' => self::faker()->dateTimeBetween('-1 year', 'now'),
+            'treatment' => self::faker()->word(),
+            'weight' => self::faker()->randomFloat(1, 1, 60),
+            'food' => self::faker()->word(),
+            'behaviour' => self::faker()->randomElement(['calme', 'agité', 'peureux']),
+            'veto' => VetoFactory::random(),
+            'animal' => AnimalFactory::random(),
         ];
     }
 

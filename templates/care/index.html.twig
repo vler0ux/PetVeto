@@ -1,29 +1,34 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Mes soins - PetVeto{% endblock %}
-
 {% block body %}
-    <h1>Mes soins vétérinaires 💉</h1>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center text-primary">
+        🩺 Suivi des soins vétérinaires de vos compagnons 🐾
+    </h1>
 
     {% if cares is empty %}
-        <p>Aucun soin enregistré.</p>
-    {% else %}
-        <ul>
-            {% for care in cares %}
-                <li>
-                    {{ care.type }} pour {{ care.animal.nom }} – le {{ care.date|date('d/m/Y') }}
-                </li>
-            {% endfor %}
-        </ul>
-
-
-    {% endif %}
-        <div class="mt-4">
-            <a href="{{ path('care_select_animal') }}" class="btn btn-success">
-                ➕ Ajouter un soin
-            </a>
+        <div class="alert alert-info text-center shadow-sm">
+            Aucun soin enregistré pour le moment.<br>
+            Cliquez sur le bouton ci-dessous pour en ajouter un 😊
         </div>
-        <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
-                ⬅️ Retour à l’accueil
+    {% else %}
+        <div class="list-group mb-4 shadow-sm">
+            {% for care in cares %}
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="fw-bold">🐾 {{ care.animal.name }}</span><br>
+                        <small class="text-muted">Soigné le {{ care.examDate|date('d/m/Y') }}</small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="d-flex gap-3 justify-content-center mt-4">
+        <a href="{{ path('care_select_animal') }}" class="btn btn-success btn-lg">
+            ➕ Ajouter un soin
         </a>
+        <a href="{{ path('app_home') }}" class="btn btn-outline-secondary btn-lg">
+            ⬅️ Retour à l’accueil
+        </a>
+    </div>
+</div>
 {% endblock %}

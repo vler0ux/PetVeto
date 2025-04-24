@@ -42,7 +42,6 @@ class Animal
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Care::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $cares;
 
-
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?Veto $veto = null;
 
@@ -63,9 +62,9 @@ class Animal
 
     public function setName(string $name): static
     {
-        $this->name = $name;
+        $this->name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
         return $this;
-    }
+    }    
 
     public function getSpecies(): ?string
     {

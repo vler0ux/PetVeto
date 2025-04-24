@@ -38,6 +38,8 @@ class AnimalType extends AbstractType
         ->add('weight', NumberType::class, [
             'label' => 'Poids (kg)',
             'required' => false,
+            'scale' => 2,
+            'attr' => ['step' => '0.01'],
         ])
         ->add('description', TextareaType::class, [
             'label' => 'Description',
