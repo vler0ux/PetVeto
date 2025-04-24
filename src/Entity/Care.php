@@ -6,7 +6,7 @@ use App\Repository\AnimalRepository;
 use App\Repository\CareRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CareRepository::class)]
 class Care
 {
@@ -14,9 +14,6 @@ class Care
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $vaccinations = null;
 
     #[ORM\Column(length: 255)]
     private ?string $treatment = null;
@@ -27,7 +24,7 @@ class Care
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $vaccinationDate = null;
 
-    #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'soins')]
+    #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'cares')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Animal $animal = null;
 
@@ -41,23 +38,15 @@ class Care
     private ?string $behaviour = null;
 
     #[ORM\ManyToOne(inversedBy: 'cares')]
-    private ?veto $veto = null;
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull(message: "Un vétérinaire doit être sélectionné pour enregistrer un soin.")]
+
+    private ?Veto $veto = null;
+
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getVaccinations(): ?string
-    {
-        return $this->vaccinations;
-    }
-
-    public function setvaccinations(string $vaccinations): static
-    {
-        $this->vaccinations = $vaccinations;
-
-        return $this;
     }
 
     public function getTreatment(): ?string
@@ -144,15 +133,16 @@ class Care
         return $this;
     }
 
-    public function getVeto(): ?veto
+    public function getVeto(): ?Veto
     {
         return $this->veto;
     }
 
-    public function setVeto(?veto $veto): static
+    public function setVeto(?Veto $veto): static
     {
         $this->veto = $veto;
 
         return $this;
     }
+
 }

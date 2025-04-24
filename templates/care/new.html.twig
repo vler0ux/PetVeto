@@ -1,36 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau soin{% endblock %}
+{% block title %}Nouveau soin - PetVeto{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <h1 class="mb-4">🩺 Nouveau soin</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">🩺 Ajouter un nouveau soin</h1>
 
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
+    {% if form.vars.data.animal %}
+        {% if lastVaccinationDate %}
+            <div class="alert alert-info text-center">
+                💉 Dernière vaccination de <strong>{{ form.vars.data.animal.name }}</strong> :
+                <span class="fw-semibold">{{ lastVaccinationDate|date('d/m/Y') }}</span>
+            </div>
+        {% else %}
+            <div class="alert alert-warning text-center">
+                ⚠️ Aucun vaccin renseigné pour <strong>{{ form.vars.data.animal.name }}</strong>.
+            </div>
+        {% endif %}
+    {% endif %}
 
-            <button class="btn btn-primary mt-3">Enregistrer le soin</button>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
 
-            <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
-    ⬅️ Retour à l’accueil
-</a>
+        <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-primary">✅ Enregistrer le soin</button>
+            <a href="{{ path('app_home') }}" class="btn btn-secondary">⬅️ Retour à l’accueil</a>
+        </div>
+    {{ form_end(form) }}
 
-        {{ form_end(form) }}
-    </div>
     {% if form.veto is defined and form.veto.vars.choices is empty %}
-    <div class="alert alert-warning">
-        ⚠️ Aucun vétérinaire enregistré. <a href="{{ path('veto_new') }}">Ajouter un vétérinaire</a>
-    </div>
-    <div class="mb-3">
-        <a href="{{ path('veto_new') }}" class="btn btn-outline-primary">
-            ➕ Ajouter un vétérinaire
-        </a>
-    </div>
-
-    <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
-    ⬅️ Retour à l’accueil
-</a>
-
-{% endif %}
-
+        <div class="alert alert-warning mt-4 text-center">
+            ⚠️ Aucun vétérinaire enregistré.<br>
+            <a href="{{ path('veto_new') }}" class="btn btn-outline-primary mt-2">
+                ➕ Ajouter un vétérinaire
+            </a>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

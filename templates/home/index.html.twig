@@ -15,12 +15,6 @@
 {% endif %}
 
 
-    <!-- Flash messages -->
-    {% for flash in app.session.get('_flashes') ?? [] %}
-        <div class="alert alert-{{ flash.type }} mt-3">
-            {{ flash.message }}
-        </div>
-    {% endfor %}
     <!-- Présentation du service -->
     <section class="mb-5">
         <h2 class="h4 text-success mb-3">Pourquoi PetVeto ?</h2>

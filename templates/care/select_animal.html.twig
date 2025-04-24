@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir un animal - PetVeto{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🐾 Choisir un animal</h1>
+
+    {% if animals is empty %}
+        <div class="alert alert-info text-center">
+            Vous n’avez encore enregistré aucun animal.
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            {% for animal in animals %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <img src="https://place-puppy.com/400x250" class="card-img-top" alt="Photo de {{ animal.name }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ animal.name }}</h5>
+                            <p class="card-text text-muted">Espèce : {{ animal.species }}</p>
+                            <p>Date de naissance : {{ animal.birthday|date('d/m/Y') }}</p>
+                            <div class="d-grid">
+                                <a href="{{ path('care_new', { animalId: animal.id }) }}" class="btn btn-success">
+                                    ➕ Ajouter un soin
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">
+            ⬅️ Retour à l’accueil
+        </a>
+    </div>
+</div>
+{% endblock %}

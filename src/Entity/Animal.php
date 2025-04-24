@@ -34,27 +34,19 @@ class Animal
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $vaccination = null;
-
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $weight = null;
 
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Care::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $cares;
 
-    /**
-     * @var Collection<int, Care>
-     */
-    #[ORM\OneToMany(targetEntity: Care::class, mappedBy: 'animal', orphanRemoval: true)]
-    private Collection $care;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
-    private ?Veto $Veto = null;
+    private ?Veto $veto = null;
 
     public function __construct()
     {
-        $this->care = new ArrayCollection();
+        $this->cares = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,18 +109,6 @@ class Animal
         return $this;
     }
 
-        public function getVaccination(): ?string
-    {
-        return $this->vaccination;
-    }
-
-    public function setVaccination(?string $vaccination): self
-    {
-        $this->vaccination = $vaccination;
-
-        return $this;
-    }
-
     public function getWeight(): ?float
     {
         return $this->weight;
@@ -144,15 +124,15 @@ class Animal
     /**
      * @return Collection<int, Care>
      */
-    public function getCare(): Collection
+    public function getCares(): Collection
     {
-        return $this->care;
+        return $this->cares;
     }
 
     public function addCare(Care $care): static
     {
-        if (!$this->care->contains($care)) {
-            $this->care->add($care);
+        if (!$this->cares->contains($care)) {
+            $this->cares->add($care);
             $care->setAnimal($this);
         }
 
@@ -161,7 +141,7 @@ class Animal
 
     public function removeCare(Care $care): static
     {
-        if ($this->care->removeElement($care)) {
+        if ($this->cares->removeElement($care)) {
             if ($care->getAnimal() === $this) {
                 $care->setAnimal(null);
             }
@@ -172,12 +152,12 @@ class Animal
 
     public function getVeto(): ?Veto
     {
-        return $this->Veto;
+        return $this->veto;
     }
 
-    public function setVeto(?Veto $Veto): static
+    public function setVeto(?Veto $veto): static
     {
-        $this->Veto = $Veto;
+        $this->veto = $veto;
 
         return $this;
     }

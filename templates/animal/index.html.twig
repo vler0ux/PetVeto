@@ -24,7 +24,7 @@
                             <h5 class="card-title fw-semibold">Nom de l'animal : {{ animal.name }}</h5>
                             <p class="card-text text-muted">Espèce de l'animal : {{ animal.species }}</p>
                             <div class="d-grid gap-2">
-                                <a href="#" class="btn btn-outline-secondary disabled" aria-disabled="true">
+                                <a href="{{ path('animal_care_list', { id: animal.id }) }}"  class="btn btn-outline-secondary disabled" aria-disabled="true">
                                     🩺 Voir les soins
                                 </a>
                             </div>

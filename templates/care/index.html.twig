@@ -16,9 +16,14 @@
             {% endfor %}
         </ul>
 
-        <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
-    ⬅️ Retour à l’accueil
-</a>
 
     {% endif %}
+        <div class="mt-4">
+            <a href="{{ path('care_select_animal') }}" class="btn btn-success">
+                ➕ Ajouter un soin
+            </a>
+        </div>
+        <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3 ms-2">
+                ⬅️ Retour à l’accueil
+        </a>
 {% endblock %}

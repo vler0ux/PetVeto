@@ -27,7 +27,7 @@ class Veto
     /**
      * @var Collection<int, Animal>
      */
-    #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'Veto')]
+    #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'veto')]
     private Collection $animals;
 
     /**
@@ -94,7 +94,7 @@ class Veto
     public function addAnimal(Animal $animal): static
     {
         if (!$this->animals->contains($animal)) {
-            $this->animals->add($animal);
+            $this->animals[]=$animal;
             $animal->setVeto($this);
         }
 

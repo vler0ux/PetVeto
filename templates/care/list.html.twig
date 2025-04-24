@@ -14,10 +14,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Animal : {{ care.animal.name }}</h5>
                             <ul class="list-unstyled">
-                                <li><strong>Vaccins :</strong> {{ care.vaccins }}</li>
                                 <li><strong>Traitement :</strong> {{ care.treatment }}</li>
-                                <li><strong>Date vaccination :</strong> {{ care.vaccin_date|date('d/m/Y') }}</li>
-                                <li><strong>Date examen véto :</strong> {{ care.veto_examination|date('d/m/Y') }}</li>
+                                <li><strong>Date vaccination :</strong> {{ care.vaccinationDate|date('d/m/Y') }}</li>
+                                <li><strong>Date examen véto :</strong> {{ care.examDate|date('d/m/Y') }}</li>
                                 <li><strong>Poids :</strong> {{ care.weightTracking }} kg</li>
                                 <li><strong>Alimentation :</strong> {{ care.food }}</li>
                                 <li><strong>Comportement :</strong> {{ care.behaviour }}</li>
