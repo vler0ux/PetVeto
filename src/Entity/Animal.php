@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 use App\Entity\Care;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 class Animal
@@ -35,6 +36,7 @@ class Animal
     private ?User $user = null;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Assert\PositiveOrZero(message: "Le poids doit être positif.")]
     private ?float $weight = null;
 
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Care::class, orphanRemoval: true, cascade: ['persist'])]

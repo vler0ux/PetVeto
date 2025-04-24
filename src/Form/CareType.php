@@ -48,7 +48,8 @@ class CareType extends AbstractType
         ])
         ->add('veto', EntityType::class, [
             'class' => Veto::class,
-            'choice_label' => 'nom',
+            'choice_label' => 'fullname',
+        
             'label' => 'Vétérinaire',
             'placeholder' => 'Sélectionner un vétérinaire',
             'required' => true,

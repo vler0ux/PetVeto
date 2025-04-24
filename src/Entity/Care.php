@@ -29,7 +29,7 @@ class Care
     private ?Animal $animal = null;
 
     #[ORM\Column]
-    private ?int $weight = null;
+    private ?float $weight = null;
 
     #[ORM\Column(length: 255)]
     private ?string $food = null;
@@ -97,12 +97,12 @@ class Care
         return $this;
     }
 
-    public function getWeight(): ?int
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
 
-    public function setWeight(int $weight): static
+    public function setWeight(float $weight): static
     {
         $this->weight = $weight;
 
