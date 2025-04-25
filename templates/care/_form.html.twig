@@ -1,0 +1,49 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.type) }}
+    <div class="form-group" id="customCareTypeContainer" style="display: none;">
+        {{ form_row(form.customCareType) }}
+    </div>
+
+    {{ form_row(form.food) }}
+    <div class="form-group" id="customFoodContainer" style="display: none;">
+        {{ form_row(form.customFood) }}
+    </div>
+
+    {{ form_row(form.behaviour) }}
+    <div class="form-group" id="customBehaviourContainer" style="display: none;">
+        {{ form_row(form.customBehaviour) }}
+    </div>
+
+    {{ form_row(form.examDate) }}
+    {{ form_row(form.notes) }}
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+{{ form_end(form) }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleField = (selectField, containerId) => {
+            const container = document.getElementById(containerId);
+
+            const checkVisibility = () => {
+                if (selectField.value === "Autre") {
+                    container.style.display = "block";
+                } else {
+                    container.style.display = "none";
+                    container.querySelector("input").value = "";
+                }
+            };
+
+            if (selectField && container) {
+                checkVisibility();
+                selectField.addEventListener("change", checkVisibility);
+            }
+        };
+
+        toggleField(document.querySelector("[name='care[type]']"), "customCareTypeContainer");
+        toggleField(document.querySelector("[name='care[food]']"), "customFoodContainer");
+        toggleField(document.querySelector("[name='care[behaviour]']"), "customBehaviourContainer");
+    });
+</script>

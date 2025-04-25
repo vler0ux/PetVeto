@@ -18,30 +18,35 @@
                             {{ form_errors(form.name) }}
                         </div>
                         <div class="mb-3">
-                            {{ form_label(form.species) }}
-                            {{ form_widget(form.species, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.species) }}
-                        </div>
-                        <div class="mb-3">
                             {{ form_label(form.birthday) }}
                             {{ form_widget(form.birthday, {'attr': {'class': 'form-control'}}) }}
                             {{ form_errors(form.birthday) }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_label(form.description) }}
-                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.description) }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_label(form.vaccination) }}
-                            {{ form_widget(form.vaccination, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.vaccination) }}
                         </div>
                         <div class="mb-3">
                             {{ form_label(form.weight) }}
                             {{ form_widget(form.weight, {'attr': {'class': 'form-control'}}) }}
                             {{ form_errors(form.weight) }}
                         </div>
+                        <div class="mb-3">
+                            {{ form_label(form.species) }}
+                            {{ form_widget(form.species, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.species) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.customSpecies) }}
+                            {{ form_widget(form.customSpecies, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.customSpecies) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.description) }}
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.description) }}
+                        </div>      
+                        <div class="mb-3">
+                            {{ form_label(form.customDescription) }}
+                            {{ form_widget(form.customDescription, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.customDescription) }}
+                        </div>      
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-success">✅ Enregistrer</button>
                         </div>

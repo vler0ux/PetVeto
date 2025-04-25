@@ -36,8 +36,8 @@ final class CareFactory extends PersistentProxyObjectFactory
             'vaccinationDate' => self::faker()->dateTimeBetween('-1 year', 'now'),
             'careName' => CareNameFactory::new(),
             'weight' => self::faker()->randomFloat(1, 1, 60),
-            'food' => self::faker()->word(),
-            'behaviour' => self::faker()->randomElement(['calme', 'agité', 'peureux']),
+            'food' => self::faker()->randomElement(['croquette', 'pâtée maison', 'ration mixte', 'B.A.R.F','regime médicalisé']),
+            'behaviour' => self::faker()->randomElement(['calme', 'agressif(ve)', 'agité(e)', 'peureux(se)', 'joueur(se)', 'stressé(e)', 'sociable', 'dominant(e)']),
             'veto' => VetoFactory::random(),
             'animal' => AnimalFactory::random(),
         ];

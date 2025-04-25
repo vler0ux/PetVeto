@@ -45,7 +45,7 @@ class CareController extends AbstractController
                     $lastVaccinationDate = $lastVaccination->getVaccinationDate();
                     $care->setVaccinationDate($lastVaccinationDate);
                 }
-        }
+            }
         }
         $form = $this->createForm(CareType::class, $care);
         $form->handleRequest($request);
@@ -70,7 +70,7 @@ class CareController extends AbstractController
         return $this->render('care/new.html.twig', [
             'form' => $form->createView(),
             'lastVaccinationDate' => $lastVaccinationDate ?? null,
-        ]);
+        ]);        
     }
 
     // recupere le soin d'un animal

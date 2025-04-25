@@ -12,12 +12,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\EventListener\CareFormListener;
 class CareType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        
         ->add('animal', EntityType::class, [
             'class' => Animal::class,
             'choice_label' => function ($animal) {
@@ -46,11 +48,44 @@ class CareType extends AbstractType
         ->add('weight', null, [
             'label' => 'Poids (kg)',
         ])
-        ->add('food', null, [
-            'label' => 'Alimentation',
+        ->add('food', ChoiceType::class, [
+            'label' => 'Nourriture',
+            'choices' => [
+                'croquettes'=>'croquettes',
+                'pâtée maison'=>'pâtée maison',
+                'ration mixte'=>'ration mixte',
+                'B.A.R.F'=>'B.A.R.F',
+                'regime médicalisé'=>'regime médicalisé',
+                'Autre (à préciser en dessous)' => 'Autre',
+            ],
+            'placeholder' => 'Sélectionner un type de nourriture',
+            'required' => false,
         ])
-        ->add('behaviour', null, [
-            'label' => 'Comportement',
+        ->add('customFood', TextType::class, [
+            'label' => 'Autre nourriture',
+            'mapped' => false,
+            'required' => false,
+        ])
+        ->add('behaviour',ChoiceType::class, [
+            'label' => 'Caratère',
+            'choices' => [
+                'calme'=>'calme',
+                'agité(e)'=>'agité(e)',
+                'peureux(se)'=>'peureux(se)',
+                'agressif(ve)'=>'agressif(ve)',
+                'joueur(se)'=>'joueur(se)',              
+                'stressé(e)'=>'stressé(e)',
+                'sociable'=>'sociable',
+                'dominant(e)'=>'dominant(e)',
+                'Autre (à préciser en dessous)' => 'Autre',
+            ],
+            'placeholder' => 'Sélectionner un caractère',
+            'required' => false,
+        ])
+        ->add('customBehaviour', TextType::class, [
+            'label' => 'Autre caractère',
+            'mapped' => false,
+            'required' => false,
         ])
         ->add('veto', EntityType::class, [
             'class' => Veto::class,
@@ -58,7 +93,8 @@ class CareType extends AbstractType
             'label' => 'Vétérinaire',
             'placeholder' => 'Sélectionner un vétérinaire',
             'required' => true,
-        ]);
+        ])
+        ->addEventSubscriber(new CareFormListener());
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -32,10 +32,20 @@ final class AnimalFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'birthday' => self::faker()->dateTime(),
-            'description' => self::faker()->text(255),
+            'birthday' => self::faker()->dateTimeBetween('-15 years', 'now'),
+            'description' => self::faker()->randomElement([
+                'Animal affectueux et joueur',
+                'A besoin d’un régime alimentaire spécial',
+                'Sensible au stress, préfère les environnements calmes',
+                'Très énergique, adore courir',
+                'Sociable avec les autres animaux','Autre'
+            ]),
             'name' => self::faker()->name(),
-            'species' => self::faker()->sentence(1),
+            'species' => self::faker()->randomElement([
+                'Chien', 'Chat', 'Lapin', 'Cochon d’Inde', 
+                'Furet', 'Perroquet','Cheval', 'Souris', 'Rat', 
+                'Hamster', 'Tortue', 'Serpent','Autre'
+            ]),
         ];
     }
 
