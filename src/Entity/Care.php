@@ -15,9 +15,6 @@ class Care
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $treatment = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $examDate= null;
 
@@ -43,22 +40,13 @@ class Care
 
     private ?Veto $veto = null;
 
+    #[ORM\ManyToOne(inversedBy: 'cares')]
+    private ?CareName $careName = null;
+
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTreatment(): ?string
-    {
-        return $this->treatment;
-    }
-
-    public function setTreatment(string $treatment): static
-    {
-        $this->treatment = $treatment;
-
-        return $this;
     }
 
     public function getexamDate(): ?\DateTimeInterface
@@ -141,6 +129,18 @@ class Care
     public function setVeto(?Veto $veto): static
     {
         $this->veto = $veto;
+
+        return $this;
+    }
+
+    public function getCareName(): ?CareName
+    {
+        return $this->careName;
+    }
+
+    public function setCareName(?CareName $careName): static
+    {
+        $this->careName = $careName;
 
         return $this;
     }

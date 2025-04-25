@@ -26,16 +26,13 @@ class CareType extends AbstractType
             'label' => 'Animal concerné',
             'placeholder' => 'Sélectionner un animal',
         ])
-        ->add('treatment', null, [
-            'label' => 'Traitement',
-        ])
         ->add('examDate', null, [
             'label' => 'Date de consultation',
             'required' => true,
         ])       
         ->add('careName', EntityType::class, [
             'class' => CareName::class,
-            'choice_label' => 'name',
+            'choice_label' => 'nameTypeCare',
             'label' => 'Type de soin',
             'placeholder' => 'Choisir un type de soin',
             'required' => true,
@@ -54,17 +51,6 @@ class CareType extends AbstractType
         ])
         ->add('behaviour', null, [
             'label' => 'Comportement',
-        ])
-        ->add('type', ChoiceType::class, [
-            'label' => 'Type de soin',
-            'choices' => [
-                'Vaccination' => 'vaccination',
-                'Vermifuge' => 'vermifuge',
-                'Consultation' => 'consultation',
-                'Bilan de santé' => 'bilan',
-            ],
-            'placeholder' => 'Choisir un type de soin',
-            'required' => true,
         ])
         ->add('veto', EntityType::class, [
             'class' => Veto::class,

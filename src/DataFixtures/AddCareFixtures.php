@@ -10,7 +10,7 @@ class AddCareFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        CareFactory::createMany(10);
+        CareFactory::createMany(5);
         $manager->flush();
     }
 }
