@@ -20,6 +20,10 @@ class AnimalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('customAnimalType', TextType::class, [
+            'required' => false,
+            'mapped' => false,
+        ])
         ->add('name', TextType::class, [
             'label' => 'Nom de l\'animal',
             'attr' => ['placeholder' => 'Entrez le nom de l\'animal'],
@@ -77,7 +81,11 @@ class AnimalType extends AbstractType
             'required' => false,
             'mapped' => false,
         ])
-        ->addEventSubscriber(new AnimalFormListener());
+        ->addEventSubscriber(new AnimalFormListener())
+        ->add('autreType', TextType::class, [
+            'required' => false,
+            'mapped' => false,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

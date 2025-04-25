@@ -11,24 +11,29 @@ class AnimalFormListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            FormEvents::POST_SUBMIT => 'onPostSubmit',
+            FormEvents::PRE_SUBMIT => 'onPreSubmit',
         ];
     }
 
-    public function onPostSubmit(FormEvent $event): void
-    {
-        $animal = $event->getData();
-        $form = $event->getForm();
+    public function onPreSubmit(FormEvent $event): void
+{
+    $data = $event->getData(); // tableau associatif
+    $form = $event->getForm();
 
-        $customDescription = $form->get('customDescription')->getData();
-        $customSpecies = $form->get('customSpecies')->getData();
-
-        if ($animal->getDescription() === 'Autre' && !empty($customDescription)) {
-            $animal->setDescription($customDescription);
-        }
-
-        if ($animal->getSpecies() === 'Autre' && !empty($customSpecies)) {
-            $animal->setSpecies($customSpecies);
-        }
+    if (isset($data['type']) && $data['type'] === 'Autre' && !empty($data['customAnimalType'])) {
+        // Tu peux ici modifier $data pour injecter la valeur
+        $data['type'] = $data['customAnimalType'];
     }
+
+    if (isset($data['description']) && $data['description'] === 'Autre' && !empty($data['customDescription'])) {
+        $data['description'] = $data['customDescription'];
+    }
+
+    if (isset($data['species']) && $data['species'] === 'Autre' && !empty($data['customSpecies'])) {
+        $data['species'] = $data['customSpecies'];
+    }
+
+    $event->setData($data);
+}
+
 }

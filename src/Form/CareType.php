@@ -19,7 +19,10 @@ class CareType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        
+        ->add('customCareType', TextType::class, [
+            'required' => false,
+            'mapped' => false,
+        ])
         ->add('animal', EntityType::class, [
             'class' => Animal::class,
             'choice_label' => function ($animal) {
@@ -56,7 +59,7 @@ class CareType extends AbstractType
                 'ration mixte'=>'ration mixte',
                 'B.A.R.F'=>'B.A.R.F',
                 'regime médicalisé'=>'regime médicalisé',
-                'Autre (à préciser en dessous)' => 'Autre',
+                'autre' => 'autre',
             ],
             'placeholder' => 'Sélectionner un type de nourriture',
             'required' => false,
@@ -77,7 +80,7 @@ class CareType extends AbstractType
                 'stressé(e)'=>'stressé(e)',
                 'sociable'=>'sociable',
                 'dominant(e)'=>'dominant(e)',
-                'Autre (à préciser en dessous)' => 'Autre',
+                'autre' => 'autre',
             ],
             'placeholder' => 'Sélectionner un caractère',
             'required' => false,
@@ -94,7 +97,11 @@ class CareType extends AbstractType
             'placeholder' => 'Sélectionner un vétérinaire',
             'required' => true,
         ])
-        ->addEventSubscriber(new CareFormListener());
+        ->addEventSubscriber(new CareFormListener())
+        ->add('autreType', TextType::class, [
+            'required' => false,
+            'mapped' => false,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
