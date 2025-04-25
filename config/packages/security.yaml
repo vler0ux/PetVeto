@@ -17,10 +17,12 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
+           
+            
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_home
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -41,6 +43,12 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/care, roles: ROLE_USER }
+        - { path: ^/cares, roles: ROLE_USER }
+        - { path: ^/animal, roles: ROLE_USER }
+        - { path: ^/animaux, roles: ROLE_USER }
+        - { path: ^/veto, roles: ROLE_USER }
+
 
 when@test:
     security:
