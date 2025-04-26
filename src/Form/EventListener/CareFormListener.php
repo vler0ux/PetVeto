@@ -17,11 +17,10 @@ class CareFormListener implements EventSubscriberInterface
 
     public function onPreSubmit(FormEvent $event): void
 {
-    $data = $event->getData(); // tableau associatif
+    $data = $event->getData();
     $form = $event->getForm();
 
     if (isset($data['type']) && $data['type'] === 'Autre' && !empty($data['customCareType'])) {
-        // Tu peux ici modifier $data pour injecter la valeur
         $data['type'] = $data['customCareType'];
     }
 

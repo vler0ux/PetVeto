@@ -1,23 +1,18 @@
 {{ form_start(form) }}
     {{ form_errors(form) }}
 
-    {{ form_row(form.careName) }}
-    <div class="form-group" id="customCareTypeContainer" style="display: none;">
-        {{ form_row(form.customCareType) }}
+    {{ form_row(form.species) }}
+    <div class="form-group" id="customSpeciesContainer" style="display: none;">
+        {{ form_row(form.customSpecies) }}
+    </div>
+    
+
+    {{ form_row(form.description) }}
+    <div class="form-group" id="customDescriptionContainer" style="display: none;">
+        {{ form_row(form.customDescription) }}
     </div>
 
-    {{ form_row(form.food) }}
-    <div class="form-group" id="customFoodContainer" style="display: none;">
-        {{ form_row(form.customFood) }}
-    </div>
-
-    {{ form_row(form.behaviour) }}
-    <div class="form-group" id="customBehaviourContainer" style="display: none;">
-        {{ form_row(form.customBehaviour) }}
-    </div>
-
-    {{ form_row(form.examDate) }}
-
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}
 
 <script>
@@ -41,8 +36,7 @@
             }
         };
 
-        toggleField(document.querySelector("[name='care[careName]']"), "customCareTypeContainer");
-        toggleField(document.querySelector("[name='care[food]']"), "customFoodContainer");
-        toggleField(document.querySelector("[name='care[behaviour]']"), "customBehaviourContainer");
+        toggleField(document.querySelector("[name='animal[species]']"), "customSpeciesContainer");
+        toggleField(document.querySelector("[name='animal[description]']"), "customDescriptionContainer");
     });
 </script>

@@ -19,10 +19,6 @@ class CareType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('customCareType', TextType::class, [
-            'required' => false,
-            'mapped' => false,
-        ])
         ->add('animal', EntityType::class, [
             'class' => Animal::class,
             'choice_label' => function ($animal) {
@@ -31,10 +27,6 @@ class CareType extends AbstractType
             'label' => 'Animal concerné',
             'placeholder' => 'Sélectionner un animal',
         ])
-        ->add('examDate', null, [
-            'label' => 'Date de consultation',
-            'required' => true,
-        ])       
         ->add('careName', EntityType::class, [
             'class' => CareName::class,
             'choice_label' => 'nameTypeCare',
@@ -42,6 +34,14 @@ class CareType extends AbstractType
             'placeholder' => 'Choisir un type de soin',
             'required' => true,
         ])
+        ->add('customCareType', TextType::class, [
+            'required' => false,
+            'mapped' => false,
+        ])
+        ->add('examDate', null, [
+            'label' => 'Date de consultation',
+            'required' => true,
+        ])       
         ->add('vaccinationDate', DateType::class, [
             'label' => 'Date de vaccination',
             'required' => false,
@@ -97,11 +97,8 @@ class CareType extends AbstractType
             'placeholder' => 'Sélectionner un vétérinaire',
             'required' => true,
         ])
-        ->addEventSubscriber(new CareFormListener())
-        ->add('autreType', TextType::class, [
-            'required' => false,
-            'mapped' => false,
-        ]);
+      
+        ->addEventSubscriber(new CareFormListener());
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -11,6 +11,10 @@
     <div class="alert alert-success">
         Bonjour {{ app.user.firstname}}! Vous êtes connecté sur VetoPet !
     </div>
+    <form action="{{ path('app_logout') }}" method="post" style="display: inline;">
+    <button type="submit" class="btn btn-danger">Se déconnecter</button>
+</form>
+
 {% endif %}
 
 
