@@ -42,6 +42,9 @@ class Animal
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Care::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $cares;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $type = null;
+
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?Veto $veto = null;
 
@@ -122,6 +125,17 @@ class Animal
         return $this;
     }
 
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+        return $this;
+    }
+
     /**
      * @return Collection<int, Care>
      */
@@ -162,4 +176,5 @@ class Animal
 
         return $this;
     }
+    
 }

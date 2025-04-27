@@ -12,47 +12,24 @@
                 </div>
                 <div class="card-body">
                     {{ form_start(form) }}
-                        <div class="mb-3">
-                            {{ form_label(form.name) }}
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.name) }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_label(form.birthday) }}
-                            {{ form_widget(form.birthday, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.birthday) }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_label(form.weight) }}
-                            {{ form_widget(form.weight, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.weight) }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_label(form.species) }}
-                            {{ form_widget(form.species, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.species) }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_label(form.customSpecies) }}
-                            {{ form_widget(form.customSpecies, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.customSpecies) }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_label(form.description) }}
-                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.description) }}
-                        </div>      
-                        <div class="mb-3">
-                            {{ form_label(form.customDescription) }}
-                            {{ form_widget(form.customDescription, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.customDescription) }}
-                        </div>      
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success">✅ Enregistrer</button>
-                        </div>
+                    
+                    <div class="mb-3">
+                        {{ form_row(form.name) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(form.birthday) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(form.weight) }}
+                    </div>
+                    <div class=" mt-4">
+                    {{ include('animal/_form.html.twig', { form: form }) }}
+                        <button type="submit" class="btn btn-success">✅ Valider l'ajout</button>
+                    </div>
+
                     {{ form_end(form) }}
                 </div>
-            </div>
+
 
             <div class="text-center mt-3">
                 <a href="{{ path('app_user_home') }}" class="btn btn-outline-primary">🏠 Retour à l'accueil</a>
@@ -60,4 +37,34 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleField = (selectField, containerId) => {
+                const container = document.getElementById(containerId);
+
+                const checkVisibility = () => {
+                    console.log("Valeur de", selectField.name, "=", selectField.value);
+                    if (selectField.value === "autre") {
+                        container.style.display = "block";
+                    } else {
+                        container.style.display = "none";
+                        const input = container.querySelector("input");
+                        if (input) input.value = "";
+                    }
+                };
+
+                if (selectField && container) {
+                    checkVisibility();
+                    selectField.addEventListener("change", checkVisibility);
+                }
+            };
+
+        toggleField(document.querySelector("[name='animal[species]']"), "customSpeciesContainer");
+        toggleField(document.querySelector("[name='animal[description]']"), "customDescriptionContainer");
+        });
+    </script>
 {% endblock %}

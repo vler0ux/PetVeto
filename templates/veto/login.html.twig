@@ -12,7 +12,7 @@
         </div>
     {% endif %}
 
-    <form method="post" action="{{ path('app_login_veto') }}">
+    <form method="post" action="{{ path('app_login_veto') }}" data-turbo="false">
         <div class="mb-3">
             <label for="inputEmail" class="form-label">Email</label>
             <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-control" required autofocus>

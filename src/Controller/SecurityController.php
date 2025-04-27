@@ -23,25 +23,32 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error
         ]);
-                
     }
 
-    #[Route('/login/veto', name: 'app_login_veto')]
+    #[Route('/veto/login', name: 'app_login_veto')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_veto_home');
+        }
         // Get login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
     
-        return $this->render('veto/login.html.twig', [
+        return $this->render('security/veto_login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
     }
     
+    #[Route(path: '/veto/logout', name: 'app_logout_veto')]
+    public function logoutVéto(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
 
     #[Route(path: '/logout', name: 'app_logout_user')]
-    public function logout(): void
+    public function logoutUser(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }

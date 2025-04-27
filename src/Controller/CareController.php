@@ -27,7 +27,7 @@ class CareController extends AbstractController
 
     // ajout d'un soin
     #[Route('/care/new', name: 'care_new')]
-    #[IsGranted('ROLE_VETO')]
+
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $care = new Care();

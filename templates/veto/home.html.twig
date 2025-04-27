@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord Vétérinaire 🩺{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Bienvenue sur ton Espace Vétérinaire 🐾</h1>
+
+    <div class="text-center">
+        <p>Bravo {{ app.user.email }} ! Tu es connecté(e) en tant que vétérinaire.</p>
+        <p>Que souhaites-tu faire aujourd'hui ?</p>
+
+        <div class="mt-4">
+            <a href="#" class="btn btn-primary m-2">Voir mes rendez-vous</a>
+            <a href="#" class="btn btn-success m-2">Gérer mes patients</a>
+               <a href="{{ path('care_new') }}" class="btn btn-secondary mt-3 ms-2">
+    ⬅️ ajouter un soin
+</a>
+
+        </div>
+    </div>
+    <form method="post" action="{{ path('app_logout_veto') }}">
+    <button type="submit">Déconnexion</button>
+</form>
+</div>
+{% endblock %}

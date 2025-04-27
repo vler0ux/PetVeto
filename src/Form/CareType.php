@@ -41,7 +41,7 @@ class CareType extends AbstractType
         ->add('examDate', null, [
             'label' => 'Date de consultation',
             'required' => true,
-        ])       
+        ])
         ->add('vaccinationDate', DateType::class, [
             'label' => 'Date de vaccination',
             'required' => false,
@@ -76,7 +76,7 @@ class CareType extends AbstractType
                 'agité(e)'=>'agité(e)',
                 'peureux(se)'=>'peureux(se)',
                 'agressif(ve)'=>'agressif(ve)',
-                'joueur(se)'=>'joueur(se)',              
+                'joueur(se)'=>'joueur(se)',
                 'stressé(e)'=>'stressé(e)',
                 'sociable'=>'sociable',
                 'dominant(e)'=>'dominant(e)',
@@ -92,12 +92,11 @@ class CareType extends AbstractType
         ])
         ->add('veto', EntityType::class, [
             'class' => Veto::class,
-            'choice_label' => 'fullname',        
+            'choice_label' => 'fullname',
             'label' => 'Vétérinaire',
             'placeholder' => 'Sélectionner un vétérinaire',
             'required' => true,
         ])
-      
         ->addEventSubscriber(new CareFormListener());
     }
 
