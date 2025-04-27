@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue chez PetVeto 🐾{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">Bienvenue sur <span class="text-success">PetVeto</span> 🐾</h1>
+    </div>
+    {% if app.user %}
+    <div class="alert alert-success text-center">
+        Bonjour {{ app.user.firstname}}! <br><br>Vous êtes connecté sur VetoPet !
+    </div>
+</form>
+
+{% endif %}
+
+
+    <!-- Call to Action en HERO -->
+    <section class="text-center mb-5">
+    <h2 class="h4 text-success mb-4">Pourquoi choisir PetVeto ? </h2>
+        <p class="lead mb-4">
+            Simplifiez la santé de vos compagnons, en toute sérénité.
+        </p>
+
+    </section>
+
+
+
+    <!-- Présentation du service -->
+   <section class="mb-5 text-center">
+    
+    <p class="fs-5">
+        Votre compagnon est en pleine forme.<br>
+        Ses soins sont suivis avec amour.<br>
+        Ses rappels de vaccins sont faits à temps, sans jamais de stress.<br><br>
+        <img src="https://cdn.pixabay.com/photo/2018/04/23/14/38/dog-3344414_960_720.jpg" 
+     class="card-img-top img-fluid mx-auto d-block" 
+     alt="Chat heureux"
+     style="max-height: 200px; max-width: 300px; object-fit: cover;">
+
+        Avec PetVeto, vous êtes toujours prêt à lui offrir ce qu'il mérite de mieux : <br><br>
+      
+        📖 Carnet de santé digitalisé<br>
+        💉 Rappels automatiques<br>
+        🩺 Conseils personnalisés pour son bien-être<br><br>
+        Avec PetVeto, son bonheur commence ici.
+    </p>
+</section>
+
+
+   <!-- Accès rapide -->
+<section class="mb-5 text-center position-relative">
+    <hr class="my-5" style="border-top: 2px solid #86c5b8; width: 60%; margin: auto;">
+    
+    <h2 class="h4 text-success mb-4">Accès rapide 🏃‍♀️</h2>
+    
+    <div class="row justify-content-center g-4">
+        <div class="col-12 col-sm-6 col-md-4 d-grid">
+            <a href="{{ path('app_animaux') }}" class="btn btn-outline-primary btn-lg rounded-pill">
+                🐾 Voir mes animaux
+            </a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 d-grid">
+            <a href="{{ path('app_cares') }}" class="btn btn-outline-success btn-lg rounded-pill">
+                💊 Consulter les soins
+            </a>
+        </div>
+    </div>
+
+    <hr class="my-5" style="border-top: 2px solid #86c5b8; width: 60%; margin: auto;">
+</section>
+
+    <!-- Témoignages -->
+    <section class="mb-5">
+    <h2 class="h4 text-success text-center mb-4">Ils nous font confiance 🐾</h2>
+    <div class="row g-4">
+        <!-- Témoignage 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0 h-100">
+                <img src="https://cdn.pixabay.com/photo/2020/05/12/11/39/cat-5162540_960_720.jpg" class="card-img-top" alt="Chat heureux">
+                <div class="card-body text-center">
+                    <p class="card-text">"Grâce à PetVeto, je n'oublie plus jamais les vaccins de mon chat !"</p>
+                    <footer class="blockquote-footer mt-2">Sophie & Minette 🐱</footer>
+                </div>
+            </div>
+        </div>
+
+        <!-- Témoignage 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0 h-100">
+                <img src="https://cdn.pixabay.com/photo/2021/07/17/14/49/rabbit-6473257_960_720.jpg" class="card-img-top" alt="Lapin heureux">
+                <div class="card-body text-center">
+                    <p class="card-text">"Un outil simple et pratique, même mon lapin est fan 🐰"</p>
+                    <footer class="blockquote-footer mt-2">Jules & Carotte 🐇</footer>
+                </div>
+            </div>
+        </div>
+
+        <!-- Témoignage 3 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0 h-100">
+                <img src="https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_960_720.jpg" class="card-img-top" alt="Chien heureux">
+                <div class="card-body text-center">
+                    <p class="card-text">"Une vraie tranquillité pour suivre la santé de mon chien 🐶"</p>
+                    <footer class="blockquote-footer mt-2">Élodie & Rex</footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</div>
+{% endblock %}

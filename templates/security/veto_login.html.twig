@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion VETERINAIRE{% endblock %}
+
+{% block body %}
+    <h1>Accès en tant que Vétérinaire</h1>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form method="post">
+        <input type="email" name="email" value="{{ last_username }}" placeholder="Email" required autofocus>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </form>
+{% endblock %}

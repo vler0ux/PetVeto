@@ -15,15 +15,14 @@
             {% for animal in animals %}
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm h-100">
-                        <img src="https://place-puppy.com/400x250" class="card-img-top" alt="Photo de {{ animal.name }}">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ animal.name }}</h5>
                             <p class="card-text text-muted">Espèce : {{ animal.species }}</p>
                             <p>Date de naissance : {{ animal.birthday|date('d/m/Y') }}</p>
                             <div class="d-grid">
-                                <a href="{{ path('care_new', { animalId: animal.id }) }}" class="btn btn-success">
-                                    ➕ Ajouter un soin
-                                </a>
+                                <a href="{{ path('animal_care_list', { id: animal.id }) }}" class="btn btn-success">
+                                    ➕ Voir la liste des soins
+                                </a> 
                             </div>
                         </div>
                     </div>
@@ -33,7 +32,7 @@
     {% endif %}
 
     <div class="text-center mt-4">
-        <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">
+        <a href="{{ path('app_user_home') }}" class="btn btn-outline-secondary">
             ⬅️ Retour à l’accueil
         </a>
     </div>

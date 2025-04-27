@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 class CareController extends AbstractController
 {
     // listes des soins
@@ -27,6 +27,7 @@ class CareController extends AbstractController
 
     // ajout d'un soin
     #[Route('/care/new', name: 'care_new')]
+    #[IsGranted('ROLE_VETO')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $care = new Care();
@@ -75,8 +76,15 @@ class CareController extends AbstractController
 
     // recupere le soin d'un animal
     #[Route('/animal/{id}/cares', name: 'animal_care_list')]
+    #[IsGranted('ROLE_USER')]
         public function listCare(Animal $animal): Response
         {
+            $user = $this->getUser();
+
+    if (!$user instanceof \App\Entity\User) {
+        throw $this->createAccessDeniedException('Accès réservé aux utilisateurs.');
+    }
+
             return $this->render('care/list.html.twig', [
                 'animal' => $animal,
                 'cares' => $animal->getCares(),
@@ -86,6 +94,12 @@ class CareController extends AbstractController
     #[Route('/care/select-animal', name: 'care_select_animal')]
         public function selectAnimal(): Response
         {
+            $user = $this->getUser();
+
+    if (!$user instanceof \App\Entity\User) {
+        throw $this->createAccessDeniedException('Accès réservé aux utilisateurs.');
+    }
+
             $user = $this->getUser();
             if (!$user instanceof \App\Entity\User) {
                 throw $this->createAccessDeniedException('Vous devez être connecté pour voir vos animaux.');

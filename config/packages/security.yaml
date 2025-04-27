@@ -5,24 +5,34 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
+        users:
             entity:
                 class: App\Entity\User
+                property: email
+        
+        vetos:
+            entity:
+                class: App\Entity\Veto
                 property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            lazy: true
-            provider: app_user_provider
-            custom_authenticator: App\Security\LoginFormAuthenticator
-           
-            
+
+        user_login:
+            provider: users
+            custom_authenticator: App\Security\UserLoginFormAuthenticator
             logout:
-                path: app_logout
-                # where to redirect after logout
-                target: app_home
+                path: app_logout_user
+                target: app_logout_success
+
+        veto_login:
+            pattern: ^/veto
+            provider: vetos
+            custom_authenticator: App\Security\VetoLoginFormAuthenticator
+            logout:
+                path: app_logout_veto
+                target:  app_logout_success
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -41,13 +51,16 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/user/login, roles: PUBLIC_ACCESS }
+        - { path: ^/user/veto, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/care, roles: ROLE_USER }
         - { path: ^/cares, roles: ROLE_USER }
         - { path: ^/animal, roles: ROLE_USER }
         - { path: ^/animaux, roles: ROLE_USER }
-        - { path: ^/veto, roles: ROLE_USER }
+        - { path: ^/veto, roles: ROLE_VETO }
+        - { path: ^/user, roles: ROLE_USER }
 
 
 when@test:
