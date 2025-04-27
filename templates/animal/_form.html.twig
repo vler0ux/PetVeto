@@ -28,7 +28,7 @@
 
                 const checkVisibility = () => {
                     const value = selectField.value.toLowerCase();
-                    if (value === "autre") { 
+                    if (value === "Autre") { 
                         container.style.display = "block";
                     } else {
                         container.style.display = "none";
@@ -38,6 +38,7 @@
                 };
 
                 checkVisibility();
+                
                 selectField.addEventListener("change", checkVisibility);
             };
 

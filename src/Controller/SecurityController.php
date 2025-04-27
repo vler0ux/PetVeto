@@ -25,7 +25,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/veto/login', name: 'app_login_veto')]
+    #[Route('/veto/login', name: 'app_login_veto',methods: ['GET'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -40,14 +40,19 @@ class SecurityController extends AbstractController
             'error' => $error,
         ]);
     }
-    
+    #[Route('/veto/login_check', name: 'app_login_veto_check', methods: ['POST'])]
+    public function loginCheck(): void
+    {
+        // Ce contrôleur peut rester vide car Symfony va l'intercepter automatiquement
+    }
+
     #[Route(path: '/veto/logout', name: 'app_logout_veto')]
-    public function logoutVéto(): void
+    public function logoutVeto(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route(path: '/logout', name: 'app_logout_user')]
+    #[Route(path: '/user/logout', name: 'app_logout_user')]
     public function logoutUser(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');

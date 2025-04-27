@@ -20,23 +20,31 @@ security:
             security: false
 
         user_login:
-            # pattern: ^/user
+            pattern: ^/(user|animal|animaux|cares)
             provider: users
             custom_authenticator: App\Security\UserLoginFormAuthenticator
+            entry_point: App\Security\UserLoginFormAuthenticator
             logout:
                 path: app_logout_user
                 target: app_logout_success
                 invalidate_session: true
-
+            form_login:
+                login_path: app_login_user
+                check_path: app_login_user_check
+                default_target_path: app_user_home
         veto_login:
-            pattern: ^/veto
+            pattern: ^/(veto|care)
             provider: vetos
             custom_authenticator: App\Security\VetoLoginFormAuthenticator
+            entry_point: App\Security\VetoLoginFormAuthenticator
             logout:
                 path: app_logout_veto
                 target:  app_logout_success
                 invalidate_session: true
-
+            form_login:
+                login_path: app_login_veto
+                check_path: app_login_veto_check
+                default_target_path: app_veto_home
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
@@ -58,12 +66,12 @@ security:
         - { path: ^/veto/login, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/care, roles: ROLE_USER }
         - { path: ^/cares, roles: ROLE_USER }
         - { path: ^/animal, roles: ROLE_USER }
         - { path: ^/animaux, roles: ROLE_USER }
-        - { path: ^/veto, roles: ROLE_VETO }
         - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/veto, roles: ROLE_VETO }
+        - { path: ^/care, roles: ROLE_VETO }        
 
 
 when@test:

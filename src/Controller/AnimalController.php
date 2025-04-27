@@ -36,8 +36,7 @@ class AnimalController extends AbstractController
         #[Route('/animaux', name: 'app_animaux')]
     public function index(AnimalRepository $animalRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+   
         $user = $this->getUser();
         $animals = $animalRepository->findBy(['user' => $user]);
 

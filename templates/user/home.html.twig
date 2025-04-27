@@ -10,6 +10,9 @@
     {% if app.user %}
     <div class="alert alert-success text-center">
         Bonjour {{ app.user.firstname}}! <br><br>Vous êtes connecté sur VetoPet !
+            <form method="post" action="{{ path('app_logout_user') }}"data-turbo="false" >
+    <button type="submit">Déconnexion</button>
+    </form>
     </div>
 </form>
 

@@ -13,14 +13,12 @@
         <div class="mt-4">
             <a href="#" class="btn btn-primary m-2">Voir mes rendez-vous</a>
             <a href="#" class="btn btn-success m-2">Gérer mes patients</a>
-               <a href="{{ path('care_new') }}" class="btn btn-secondary mt-3 ms-2">
-    ⬅️ ajouter un soin
-</a>
+            <a href="{{ path('care_new') }}" class="btn btn-secondary m-2"> ⬅️ ajouter un soin</a>
 
         </div>
     </div>
-    <form method="post" action="{{ path('app_logout_veto') }}">
+    <form method="post" action="{{ path('app_logout_veto') }}"data-turbo="false" >
     <button type="submit">Déconnexion</button>
-</form>
+    </form>
 </div>
 {% endblock %}

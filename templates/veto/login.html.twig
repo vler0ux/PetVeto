@@ -15,12 +15,12 @@
     <form method="post" action="{{ path('app_login_veto') }}" data-turbo="false">
         <div class="mb-3">
             <label for="inputEmail" class="form-label">Email</label>
-            <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-control" required autofocus>
+            <input type="email"  name="email" required >
         </div>
 
         <div class="mb-3">
             <label for="inputPassword" class="form-label">Mot de passe</label>
-            <input type="password" name="_password" id="inputPassword" class="form-control" required>
+            <input type="password" name="password" required>
         </div>
 
         <input type="hidden" name="_csrf_token"
