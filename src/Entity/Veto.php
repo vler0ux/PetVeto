@@ -7,17 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: VetoRepository::class)]
-class Veto implements UserInterface
+class Veto implements UserInterface,PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(type: 'json')]
-    private array $roles = [];
 
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
@@ -27,6 +25,12 @@ class Veto implements UserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
+
+    #[ORM\Column(type: 'string')]
+    private ?string $password = null;
+
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     /**
      * @var Collection<int, Animal>
@@ -88,6 +92,18 @@ class Veto implements UserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }
@@ -173,8 +189,7 @@ class Veto implements UserInterface
     }
 
     public function eraseCredentials(): void
-    {
-        
+    {        
     }
 
 }

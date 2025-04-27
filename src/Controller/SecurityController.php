@@ -26,21 +26,19 @@ class SecurityController extends AbstractController
                 
     }
 
-    #[Route(path: '/veto/login', name: 'app_login_veto')]
-    public function loginVeto(AuthenticationUtils $authenticationUtils): Response
+    #[Route('/login/veto', name: 'app_login_veto')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_veto_home');
-        }
-
+        // Get login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/veto_login.html.twig', [
+    
+        return $this->render('veto/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
     }
+    
 
     #[Route(path: '/logout', name: 'app_logout_user')]
     public function logout(): void
