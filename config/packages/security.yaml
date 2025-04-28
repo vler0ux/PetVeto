@@ -65,6 +65,7 @@ security:
         - { path: ^/user/login, roles: PUBLIC_ACCESS }
         - { path: ^/veto/login, roles: PUBLIC_ACCESS }
         - { path: ^/veto/nouveau, roles: PUBLIC_ACCESS }
+        - { path: ^/care/select-animal, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }

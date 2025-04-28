@@ -22,7 +22,11 @@
                     <div class="mb-3">
                         {{ form_row(form.weight) }}
                     </div>
+                    <div class="mb-3">
+                        {{ form_row(form.species) }}
+                    </div>
                     {{ include('animal/_form.html.twig', { form: form }) }}
+
                     <div class=" mt-4">
                         <button type="submit" class="btn btn-success">✅ Valider l'ajout</button>
                     </div>

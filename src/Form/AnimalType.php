@@ -38,15 +38,9 @@ class AnimalType extends AbstractType
                 'Serpent' => 'Serpent',
                 'Souris' => 'Souris',
                 'Tortue' => 'Tortue',
-                'Autre (à préciser en dessous)' => 'Autre',
             ],
                 'placeholder' => 'Sélectionner l’espèce',
                 'required' => true,
-        ])
-        ->add('customSpecies', TextType::class, [
-            'label' => 'Autre espèce non listée',
-            'required' => false,
-            'mapped' => false,
         ])
         ->add('birthday', DateType::class, [
             'label' => 'Date de naissance',

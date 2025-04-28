@@ -1,21 +1,9 @@
-
-
-
-
-<div class="mb-3">
-    {{ form_row(form.species) }}
-        <div id="customSpeciesContainer" style="display: none; margin-top: 10px;">
-            {{ form_row(form.customSpecies) }}
-        </div>
-</div>        
-
 <div class="mb-3">
     {{ form_row(form.description) }}
         <div id="customDescriptionContainer" style="display: none; margin-top: 10px;">
             {{ form_row(form.customDescription) }}
         </div>
 </div>
-
 
 {% block javascripts %}
     <script>
@@ -37,17 +25,14 @@
                         container.style.display = "none";
                         const input = container.querySelector("input, textarea, select");
                         if (input) input.value = "";
-                    }
+                        }
                 };
 
                 setTimeout(checkVisibility, 0);
 
                 selectField.addEventListener("change", checkVisibility);
             };
-       
-            toggleField(document.querySelector("[name='animal[species]']"), "customSpeciesContainer");
             toggleField(document.querySelector("[name='animal[description]']"), "customDescriptionContainer");
         });
-        
     </script>
 {% endblock %}

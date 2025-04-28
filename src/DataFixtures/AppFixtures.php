@@ -13,10 +13,10 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        UserFactory::createMany(5);
-        VetoFactory::createMany(3);
-        AnimalFactory::createMany(10);
-        CareFactory::createMany(20);
+        UserFactory::createMany(10);
+        VetoFactory::createMany(5);
+        AnimalFactory::createMany(30);
+        CareFactory::createMany(60);
         $manager->flush();
     }
 }

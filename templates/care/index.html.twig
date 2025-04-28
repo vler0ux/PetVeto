@@ -3,13 +3,18 @@
 {% block body %}
 <div class="container mt-5">
     <h1 class="mb-5 text-center text-primary">
-        🩺 Suivi vétérinaire de vos compagnons 🐾
+        🩺 Suivi vétérinaire <br>de tous vos compagnons 🐾
     </h1>
 
     {% if cares is empty %}
         <div class="alert alert-info text-center shadow p-4 rounded">
-            <h4 class="alert-heading mb-3">Aucun soin trouvé !</h4>
-            <p>Faites le point avec votre vétérinaire pour un bilan de santé 🐶🐱 !</p>
+            <h4 class="alert-heading mb-3">Aucun soin trouvé pour vos animaux !</h4>
+            <p>Faites le point avec votre vétérinaire 🐶🐱 !</p>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ path('app_user_home') }}" class="btn btn-outline-secondary">
+                ⬅️ Retour à l’accueil
+            </a>
         </div>
     {% else %}
         <div class="row g-4">

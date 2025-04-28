@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des soins{% endblock %}
+{% block title %}Liste des soins  {% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <h1 class="mb-4">🩺 Liste des soins</h1>
+<div class="container mt-4 text-center">
+    <h1 class="mb-4">🩺 Liste des soins de {{ animal.name }} </h1>
 
     {% if cares is not empty %}
         <div class="row">
@@ -14,12 +14,13 @@
                         <div class="card-body">
                             <h5 class="card-title">Animal : {{ care.animal.name }}</h5>
                             <ul class="list-unstyled">
-                                <li><strong>Traitement :</strong> {{ care.careName.nameTypeCare }}</li>
+                                <li><strong>Espèce :</strong> {{ care.animal.species }}</li>
+                                <li><strong>Traitement :</strong> {{ care.careName }}</li>
                                 <li><strong>Date vaccination :</strong> {{ care.vaccinationDate|date('d/m/Y') }}</li>
                                 <li><strong>Date examen véto :</strong> {{ care.examDate|date('d/m/Y') }}</li>
                                 <li><strong>Poids :</strong> {{ care.weight }} kg</li>
                                 <li><strong>Alimentation :</strong> {{ care.food }}</li>
-                                <li><strong>Comportement :</strong> {{ care.behaviour }}</li>
+                                <li><strong>Caractère :</strong> {{ care.behaviour }}</li>
                             </ul>
                         </div>
                     </div>
@@ -27,7 +28,10 @@
             {% endfor %}
         </div>
     {% else %}
-        <div class="alert alert-info">Aucun soin enregistré pour le moment.</div>
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading mb-3">Aucun soin trouvé pour {{ animal.name }}  !</h4>
+            Faites le point avec votre vétérinaire pour un bilan de santé 🐶🐱 ! <br> {{ animal.name }} a besoin d'un suivi régulier ❤️ 
+        </div>
     {% endif %}
 
     <a href="{{ path('app_user_home') }}" class="btn btn-secondary mt-3 ms-2">
