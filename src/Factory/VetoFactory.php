@@ -33,8 +33,9 @@ final class VetoFactory extends PersistentProxyObjectFactory
     {
         return [
             'email' => self::faker()->email(),
-            'firstname' => self::faker()->sentence(1),
-            'lastname' => self::faker()->sentence(1),
+    'firstname' => self::faker()->firstName(),
+    'lastname' => self::faker()->lastName(),
+            'password' => 'mdp123456',
         ];
     }
 

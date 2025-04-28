@@ -8,6 +8,7 @@ use App\Form\CareType;
 use App\Repository\CareRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,12 +17,14 @@ class CareController extends AbstractController
 {
     // listes des soins
     #[Route('/cares', name: 'app_cares')]
-        public function index(CareRepository $careRepository): Response
+        public function index(CareRepository $careRepository, Security $security): Response
         {
-            $care = $careRepository->findAll();
+            $user = $security->getUser();
+
+            $cares = $careRepository->findByUserAnimals($user);
 
             return $this->render('care/index.html.twig', [
-                'cares' => $care,
+                'cares' => $cares,
             ]);
         }
 

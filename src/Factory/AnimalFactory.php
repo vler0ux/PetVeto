@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Factory;
-
+use App\Factory\UserFactory;
 use App\Entity\Animal;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -32,19 +32,26 @@ final class AnimalFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
+            'user' => UserFactory::random(),
             'birthday' => self::faker()->dateTimeBetween('-15 years', 'now'),
             'description' => self::faker()->randomElement([
                 'Animal affectueux et joueur',
                 'A besoin d’un régime alimentaire spécial',
                 'Sensible au stress, préfère les environnements calmes',
                 'Très énergique, adore courir',
-                'Sociable avec les autres animaux','Autre'
+                'Sociable avec les autres animaux'
             ]),
-            'name' => self::faker()->name(),
+            'weight' => self::faker()->randomFloat(1, 1, 60),
+            'name' => self::faker()->randomElement([
+                'Tulipe', 'Lilas', 'Rose', 'Camélia', 'Magnolia', 'Églantine', 'Coquelicot', 'Myrtille',
+                'Lou', 'Léo', 'Zoé', 'Élia', 'Malo', 'Jade', 'Sacha', 'Noé', 'Léna',
+                'Cachou', 'Pépito', 'Moka', 'Choupi', 'Biscotte', 'Plume', 'Caramel', 'Praline',
+                'Panda', 'Ourson', 'Chaton', 'Moineau', 'Écureuil', 'Loutre'
+            ]),
             'species' => self::faker()->randomElement([
-                'Chien', 'Chat', 'Lapin', 'Cochon d’Inde', 
-                'Furet', 'Perroquet','Cheval', 'Souris', 'Rat', 
-                'Hamster', 'Tortue', 'Serpent','Autre'
+                'Chien', 'Chat', 'Lapin', 'Cochon d’Inde',
+                'Furet', 'Perroquet','Cheval', 'Souris', 'Rat',
+                'Hamster', 'Tortue', 'Serpent'
             ]),
         ];
     }

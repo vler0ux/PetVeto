@@ -26,7 +26,9 @@
         <div class="mb-3">
             {{ form_row(form.veto) }}
         </div>
-        {{ include('care/_form.html.twig', { form: form }) }}        
+        
+        {{ include('care/_form.html.twig', { form: form }) }}
+
         <div class="d-flex gap-2 mt-3 mb-3">
             <button type="submit" class="btn btn-primary">✅ Enregistrer le soin</button>
         </div>

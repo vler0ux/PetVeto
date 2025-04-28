@@ -17,6 +17,8 @@ use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
+
+// fichier utilisé pour la redirection après l'enregistrement d'un user
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
@@ -53,7 +55,6 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $request->getSession()->set('_flashes', [
             ['type' => 'success', 'message' => 'Bienvenue sur PetVeto ! 🐾']
         ]);
-
         return new RedirectResponse($this->urlGenerator->generate('app_animaux'));
     }
 

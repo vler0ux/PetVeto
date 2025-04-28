@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Animal;
-use App\Entity\Owner;
 use App\Form\EventListener\AnimalFormListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

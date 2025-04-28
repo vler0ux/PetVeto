@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Animal;
 use App\Entity\Care;
 use App\Entity\Veto;
-use App\Entity\CareName;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,14 +26,22 @@ class CareType extends AbstractType
             'label' => 'Animal concerné',
             'placeholder' => 'Sélectionner un animal',
         ])
-        ->add('careName', EntityType::class, [
-            'class' => CareName::class,
-            'choice_label' => 'nameTypeCare',
+        ->add('careName', ChoiceType::class, [
+            'label' => 'Nom du soin',
+            'choices' => [
+            'Vaccination'=>'Vaccination',
+            'Vermifuge'=>'Vermifuge',
+            'Consultation'=>'Consultation',
+            'Antiparasitaire'=>'Antiparasitaire',
+            'Bilan de santé'=>'Bilan de santé',
+            'Stérilisation'=>'Stérilisation',
+            'Analyse'=>'Analyse',
+            ],
             'label' => 'Type de soin',
             'placeholder' => 'Choisir un type de soin',
             'required' => true,
         ])
-        ->add('customCareType', TextType::class, [
+        ->add('customCareName', TextType::class, [
             'required' => false,
             'mapped' => false,
         ])

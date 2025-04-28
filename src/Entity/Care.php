@@ -40,8 +40,8 @@ class Care
 
     private ?Veto $veto = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cares')]
-    private ?CareName $careName = null;
+    #[ORM\Column(length: 255)]
+    private ?string $careName = null;
 
 
     public function getId(): ?int
@@ -133,12 +133,12 @@ class Care
         return $this;
     }
 
-    public function getCareName(): ?CareName
+    public function getCareName(): ?string
     {
         return $this->careName;
     }
 
-    public function setCareName(?CareName $careName): static
+    public function setCareName(?string $careName): static
     {
         $this->careName = $careName;
 

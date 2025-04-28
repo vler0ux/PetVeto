@@ -42,8 +42,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $phone = null;
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
+    private ?string $phone = null;
 
     #[ORM\Column(length: 255)]
     private ?string $rue = null;
@@ -176,7 +176,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): static
+    public function setPhone(?string $phone): static
     {
         $this->phone = $phone;
 

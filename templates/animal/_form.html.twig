@@ -1,4 +1,7 @@
 
+
+
+
 <div class="mb-3">
     {{ form_row(form.species) }}
         <div id="customSpeciesContainer" style="display: none; margin-top: 10px;">
@@ -14,10 +17,9 @@
 </div>
 
 
-
 {% block javascripts %}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("turbo:load", function () {
             const toggleField = (selectField, containerId) => {
                 const container = document.getElementById(containerId);
 
@@ -28,8 +30,8 @@
 
                 const checkVisibility = () => {
                     const value = selectField.value;
-                    
-                    if (value === "Autre") { 
+
+                    if (value === "Autre") {
                         container.style.display = "block";
                     } else {
                         container.style.display = "none";
@@ -38,13 +40,14 @@
                     }
                 };
 
-                checkVisibility();
-                
+                setTimeout(checkVisibility, 0);
+
                 selectField.addEventListener("change", checkVisibility);
             };
-
+       
             toggleField(document.querySelector("[name='animal[species]']"), "customSpeciesContainer");
             toggleField(document.querySelector("[name='animal[description]']"), "customDescriptionContainer");
         });
+        
     </script>
 {% endblock %}

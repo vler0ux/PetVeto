@@ -20,8 +20,8 @@ class CareFormListener implements EventSubscriberInterface
     $data = $event->getData();
     $form = $event->getForm();
 
-    if (isset($data['type']) && $data['type'] === 'Autre' && !empty($data['customCareType'])) {
-        $data['type'] = $data['customCareType'];
+    if (isset($data['careName']) && $data['careName'] === 'Autre' && !empty($data['customCareName'])) {
+        $data['careName'] = $data['customCareName'];
     }
 
     if (isset($data['food']) && $data['food'] === 'Autre' && !empty($data['customFood'])) {

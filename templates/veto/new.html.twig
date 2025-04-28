@@ -30,7 +30,13 @@
     </div>
 
     <div class="mb-3">
-        {{ form_row(form.plainPassword,) }}
+        {{ form_row(form.plainPassword) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.agreeTerms, {
+            label: 'Je suis bien un vétérinaire',
+        }) }}
     </div>
 
     <div class="d-flex gap-2 mt-3 mb-3">

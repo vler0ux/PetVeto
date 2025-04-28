@@ -9,7 +9,7 @@
     {% if cares is empty %}
         <div class="alert alert-info text-center shadow p-4 rounded">
             <h4 class="alert-heading mb-3">Aucun soin trouvé !</h4>
-            <p>Il est temps d'enregistrer les premiers soins de vos compagnons 🐶🐱 !</p>
+            <p>Faites le point avec votre vétérinaire pour un bilan de santé 🐶🐱 !</p>
         </div>
     {% else %}
         <div class="row g-4">
@@ -22,7 +22,7 @@
                             </h5>
                             <p class="card-text">
                                 <strong>Type de soin :</strong>
-                                {{ care.careName ? care.careName.nameTypeCare : 'Non défini' }}<br>
+                                {{ care.careName ? care.careName : 'Non défini' }}<br>
                                 <strong>Date :</strong>
                                 {{ care.examDate|date('d/m/Y') }}
                             </p>

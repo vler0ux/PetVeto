@@ -6,7 +6,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-            
+
             {% block stylesheets %}
                 <style>
                     body.bg-light-green {
@@ -23,34 +23,32 @@
 <body class="bg-light-green">
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
         <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">
-      🐾 PetVeto
-    </a>
+        🐾 PetVeto
+        </a>
 
-    <div class="d-flex align-items-center ms-auto">
-      <span class="me-3 text-muted">
-        📅 {{ "now"|date("d/m/Y") }}
-      </span>
-      <span class="fw-semibold text-primary">
-        👋 Bienvenue !
-      </span>
-    </div>
-  </div>
-</nav>
-
-{% for label in ['care_success', 'animal_success','inscription_success','veto_success'] %}
-    {% for message in app.flashes(label) %}
-        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="d-flex align-items-center ms-auto">
+            <span class="me-3 text-muted">
+                📅 {{ "now"|date("d/m/Y") }}
+            </span>
+            <span class="fw-semibold text-primary">
+                👋 Bienvenue !
+            </span>
         </div>
-    {% endfor %}
-{% endfor %}
+    </nav>
 
-
-
-    {% block body %}{% endblock %}
-    <br>
+        {% for label in ['success','care_success', 'animal_success','inscription_success','veto_success'] %}
+            {% for message in app.flashes(label) %}
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% block body %}{% endblock %}
+        <br>
 </body>
+
+
     <footer class="bg-white text-center text-lg-start mt-auto">
         <div class="text-center p-3">
             © 2025 Pet Veto

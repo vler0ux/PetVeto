@@ -1,8 +1,8 @@
 
 <div class="mb-3">
     {{ form_row(form.careName) }}
-    <div class="form-group" id="customCareTypeContainer" style="display: none;">
-        {{ form_row(form.customCareType) }}
+    <div class="form-group" id="customCareNameContainer" style="display: none;">
+        {{ form_row(form.customCareName) }}
     </div>
 </div>
 
@@ -21,7 +21,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("turbo:load", function () {
         const toggleField = (selectField, containerId) => {
             const container = document.getElementById(containerId);
 
@@ -31,7 +31,7 @@
             }
 
             const checkVisibility = () => {
-                if (selectField.value === "autre") { 
+                if (selectField.value === "autre") {
                     container.style.display = "block";
                 } else {
                     container.style.display = "none";
@@ -39,13 +39,11 @@
                     if (input) input.value = "";
                 }
             };
-           
-                checkVisibility();
+                setTimeout(checkVisibility, 0);
                 selectField.addEventListener("change", checkVisibility);
-            
         };
 
-        toggleField(document.querySelector("[name='care[careName]']"), "customCareTypeContainer");
+        toggleField(document.querySelector("[name='care[careName]']"), "customCareNameContainer");
         toggleField(document.querySelector("[name='care[food]']"), "customFoodContainer");
         toggleField(document.querySelector("[name='care[behaviour]']"), "customBehaviourContainer");
     });

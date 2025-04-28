@@ -27,8 +27,8 @@ class RegistrationController extends AbstractController
 
     #[Route('/register', name: 'app_register')]
     public function register(
-        Request $request, 
-        UserPasswordHasherInterface $userPasswordHasher, 
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
         UserAuthenticatorInterface $userAuthenticator,
         LoginFormAuthenticator $authenticator
@@ -42,7 +42,6 @@ class RegistrationController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $entityManager->persist($user);
@@ -65,7 +64,7 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
             $this->addFlash('inscription_success', 'Bienvenue sur PetVeto ! Vous êtes bien inscrite 🐾');
-            return $this->redirectToRoute('app_animaux');
+            return $this->redirectToRoute('app_user_home');
         }
 
         return $this->render('registration/register.html.twig', [

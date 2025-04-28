@@ -3,6 +3,8 @@
 namespace App\Factory;
 
 use App\Entity\Care;
+use App\Factory\AnimalFactory;
+use App\Factory\VetoFactory;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -31,16 +33,30 @@ final class CareFactory extends PersistentProxyObjectFactory
      */
     protected function defaults(): array|callable
     {
-        return [
-            'examDate' => self::faker()->dateTimeBetween('-1 year', 'now'),
-            'vaccinationDate' => self::faker()->dateTimeBetween('-1 year', 'now'),
-            'careName' => CareNameFactory::new(),
-            'weight' => self::faker()->randomFloat(1, 1, 60),
-            'food' => self::faker()->randomElement(['croquette', 'pâtée maison', 'ration mixte', 'B.A.R.F','regime médicalisé']),
-            'behaviour' => self::faker()->randomElement(['calme', 'agressif(ve)', 'agité(e)', 'peureux(se)', 'joueur(se)', 'stressé(e)', 'sociable', 'dominant(e)']),
-            'veto' => VetoFactory::random(),
-            'animal' => AnimalFactory::random(),
-        ];
+        return function() {
+            $animal = AnimalFactory::random();
+            $animalWeight = $animal->getWeight();
+
+            // variation du poid
+            $variation = $animalWeight * (random_int(-5, 5) / 100);
+            $careWeight = round($animalWeight + $variation, 2);
+
+            return [
+                'examDate' => self::faker()->dateTimeBetween('-1 year', 'now'),
+                'vaccinationDate' => self::faker()->dateTimeBetween('-1 year', 'now'),
+                'careName' =>  self::faker()->randomElement(['Vaccination',
+            'Vermifuge',
+            'Consultation',
+            'Bilan de santé',
+            'Stérilisation',
+            'Analyse']),
+                'weight' => $careWeight,
+                'food' => self::faker()->randomElement(['croquette', 'pâtée maison', 'ration mixte', 'B.A.R.F','regime médicalisé']),
+                'behaviour' => self::faker()->randomElement(['calme', 'agressif(ve)', 'agité(e)', 'peureux(se)', 'joueur(se)', 'stressé(e)', 'sociable', 'dominant(e)']),
+                'veto' => VetoFactory::random(),
+                'animal' => $animal,
+            ];
+        };
     }
 
     /**

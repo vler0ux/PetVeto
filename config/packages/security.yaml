@@ -20,7 +20,7 @@ security:
             security: false
 
         user_login:
-            pattern: ^/(user|animal|animaux|cares)
+            pattern: ^/(user|animal|animaux|cares|register)
             provider: users
             custom_authenticator: App\Security\UserLoginFormAuthenticator
             entry_point: App\Security\UserLoginFormAuthenticator
@@ -65,6 +65,7 @@ security:
         - { path: ^/user/login, roles: PUBLIC_ACCESS }
         - { path: ^/veto/login, roles: PUBLIC_ACCESS }
         - { path: ^/veto/nouveau, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/cares, roles: ROLE_USER }
