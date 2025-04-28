@@ -24,10 +24,6 @@ class AnimalType extends AbstractType
             'label' => 'Nom de l\'animal',
             'attr' => ['placeholder' => 'Entrez le nom de l\'animal'],
         ])
-        // ->add('customAnimalType', TextType::class, [
-        //     'required' => false,
-        //     'mapped' => false,
-        // ])
         ->add('species', ChoiceType::class, [
             'label' => 'Espèce',
             'choices' => [

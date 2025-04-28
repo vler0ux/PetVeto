@@ -21,24 +21,32 @@
     </head>
 
 <body class="bg-light-green">
-    {# <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{{ path('app_login') }}">Se connecter </a>
-                    {% if app.user %}
-                        <h3 class="nav-item">
-                            <span class="navbar-text me-2">
-                                Connecté(e): {{ app.user.firstname }} 
-                            </span>
-                        </h3>                       
-                    {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+        <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">
+      🐾 PetVeto
+    </a>
+
+    <div class="d-flex align-items-center ms-auto">
+      <span class="me-3 text-muted">
+        📅 {{ "now"|date("d/m/Y") }}
+      </span>
+      <span class="fw-semibold text-primary">
+        👋 Bienvenue !
+      </span>
+    </div>
+  </div>
+</nav>
+
+{% for label in ['care_success', 'animal_success','inscription_success','veto_success'] %}
+    {% for message in app.flashes(label) %}
+        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    </nav> #}
- <!--          <form method="post" action="{{ path('app_logout_user') }}" style="display: inline;">
-    <button class="btn btn-link navbar-brand" type="submit" style="border: none; background: none; cursor: pointer;">
-        Se déconnecter
-    </button>
-</form>
--->
+    {% endfor %}
+{% endfor %}
+
+
 
     {% block body %}{% endblock %}
     <br>

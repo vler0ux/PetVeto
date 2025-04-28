@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VetoDashboardController extends AbstractController
 {
-    #[Route('/veto/dashboard', name: 'veto_dashboard')]
+    #[Route('/veto/home', name: 'veto_home')]
     public function index(): Response
     {
-        return $this->render('veto/dashboard.html.twig');
+        return $this->render('veto/home.html.twig');
     }
 }

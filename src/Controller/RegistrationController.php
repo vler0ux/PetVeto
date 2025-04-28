@@ -64,7 +64,7 @@ class RegistrationController extends AbstractController
             );
 
             // do anything else you need here, like send an email
-            $this->addFlash('success', 'Bienvenue sur PetVeto ! Vous êtes bien inscrite 🐾');
+            $this->addFlash('inscription_success', 'Bienvenue sur PetVeto ! Vous êtes bien inscrite 🐾');
             return $this->redirectToRoute('app_animaux');
         }
 

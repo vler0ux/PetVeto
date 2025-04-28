@@ -27,7 +27,7 @@ class CareController extends AbstractController
 
     // ajout d'un soin
     #[Route('/care/new', name: 'care_new')]
-
+    #[IsGranted('ROLE_VETO')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $care = new Care();
@@ -62,10 +62,8 @@ class CareController extends AbstractController
             $entityManager->persist($care);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Soin enregistré avec succès !');
-            return $this->redirectToRoute('animal_care_list', [
-                'id' => $animal->getId()
-            ]);
+            $this->addFlash('care_success', 'Soin enregistré avec succès !');
+            return $this->redirectToRoute('veto_home');
         }
 
         return $this->render('care/new.html.twig', [

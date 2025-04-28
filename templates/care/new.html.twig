@@ -6,25 +6,32 @@
 <div class="container mt-4">
     <h1 class="mb-4">🩺 Ajouter un nouveau soin</h1>
 
-    {% if form.vars.data.animal %}
-        {% if lastVaccinationDate %}
-            <div class="alert alert-info text-center">
-                💉 Dernière vaccination de <strong>{{ form.vars.data.animal.name }}</strong> :
-                <span class="fw-semibold">{{ lastVaccinationDate|date('d/m/Y') }}</span>
-            </div>
-        {% else %}
-            <div class="alert alert-warning text-center">
-                ⚠️ Aucun vaccin renseigné pour <strong>{{ form.vars.data.animal.name }}</strong>.
-            </div>
-        {% endif %}
-    {% endif %}
-
     {{ form_start(form) }}
-       {{ include('care/_form.html.twig', { form: form }) }}
-        <div class="d-flex gap-2 mt-3">
-            <button type="submit" class="btn btn-primary">✅ Enregistrer le soin</button>
-            <a href="{{ path('app_veto_home') }}" class="btn btn-secondary">⬅️ Retour à l’accueil</a>
+        <div class="mb-3">
+            {{ form_row(form.animal) }}
         </div>
+
+        <div class="mb-3">
+            {{ form_row(form.weight) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(form.vaccinationDate) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(form.examDate) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(form.veto) }}
+        </div>
+        {{ include('care/_form.html.twig', { form: form }) }}        
+        <div class="d-flex gap-2 mt-3 mb-3">
+            <button type="submit" class="btn btn-primary">✅ Enregistrer le soin</button>
+        </div>
+
+        <a href="{{ path('app_veto_home') }}" class="btn btn-secondary">⬅️ Retour à l’accueil</a>      
     {{ form_end(form) }}
 
     {% if form.veto is defined and form.veto.vars.choices is empty %}
@@ -35,38 +42,7 @@
             </a>
         </div>
     {% endif %}
+    
 </div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleField = (selectField, containerId) => {
-                const container = document.getElementById(containerId);
-
-                const checkVisibility = () => {
-                    console.log("Valeur de", selectField.name, "=", selectField.value);
-                    if (selectField.value === "autre") {
-                        container.style.display = "block";
-                    } else {
-                        container.style.display = "none";
-                        const input = container.querySelector("input");
-                        if (input) input.value = "";
-                    }
-                };
-
-                if (selectField && container) {
-                    checkVisibility();
-                    selectField.addEventListener("change", checkVisibility);
-                }
-            };
-
-            toggleField(document.querySelector("[name='care[type]']"), "customCareTypeContainer");
-            toggleField(document.querySelector("[name='care[food]']"), "customFoodContainer");
-            toggleField(document.querySelector("[name='care[behaviour]']"), "customBehaviourContainer");
-        });
-    </script>
-{% endblock %}
-
 

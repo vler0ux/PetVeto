@@ -9,13 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class VetoController extends AbstractController
 {
-    #[IsGranted('ROLE_SUPER_VETO')]
     #[Route('/veto/nouveau', name: 'veto_new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $veto = new Veto();
         $form = $this->createForm(VetoType::class, $veto);
@@ -23,12 +22,14 @@ class VetoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $veto->setRoles(['ROLE_VETO']);
+            $plainPassword = $form->get('plainPassword')->getData();
+            $hashedPassword = $passwordHasher->hashPassword($veto, $plainPassword);
+            $veto->setPassword($hashedPassword);
             $entityManager->persist($veto);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Vétérinaire enregistré !');
-            return $this->redirectToRoute('care_new');
+            $this->addFlash('veto_success', 'Vétérinaire enregistré !');
+            return $this->redirectToRoute('app_veto_home');
         }
 
         return $this->render('veto/new.html.twig', [

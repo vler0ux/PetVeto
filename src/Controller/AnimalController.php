@@ -24,6 +24,7 @@ class AnimalController extends AbstractController
             $animal->setUser($this->getUser());
             $entityManager->persist($animal);
             $entityManager->flush();
+            $this->addFlash('animal_success', 'Votre nouvel animal est enregistré avec succès !');
             return $this->redirectToRoute('app_animaux');
         }
 

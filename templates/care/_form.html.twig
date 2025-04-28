@@ -1,44 +1,48 @@
-{{ form_start(form) }}
-    {{ form_errors(form) }}
 
+<div class="mb-3">
     {{ form_row(form.careName) }}
     <div class="form-group" id="customCareTypeContainer" style="display: none;">
         {{ form_row(form.customCareType) }}
     </div>
+</div>
 
+<div class="mb-3">
     {{ form_row(form.food) }}
     <div class="form-group" id="customFoodContainer" style="display: none;">
         {{ form_row(form.customFood) }}
     </div>
+</div>
 
+<div class="mb-3">
     {{ form_row(form.behaviour) }}
     <div class="form-group" id="customBehaviourContainer" style="display: none;">
         {{ form_row(form.customBehaviour) }}
     </div>
-
-    {{ form_row(form.examDate) }}
-
-{{ form_end(form) }}
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const toggleField = (selectField, containerId) => {
             const container = document.getElementById(containerId);
 
+            if (!selectField || !container) {
+                console.warn("Champ ou conteneur manquant :", selectField, containerId);
+                return;
+            }
+
             const checkVisibility = () => {
                 if (selectField.value === "autre") { 
                     container.style.display = "block";
                 } else {
                     container.style.display = "none";
-                    const input = container.querySelector("input");
+                    const input = container.querySelector("input, textarea, select");
                     if (input) input.value = "";
                 }
             };
-
-            if (selectField && container) {
+           
                 checkVisibility();
                 selectField.addEventListener("change", checkVisibility);
-            }
+            
         };
 
         toggleField(document.querySelector("[name='care[careName]']"), "customCareTypeContainer");

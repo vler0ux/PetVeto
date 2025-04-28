@@ -38,33 +38,3 @@
     </div>
 </div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleField = (selectField, containerId) => {
-                const container = document.getElementById(containerId);
-
-                const checkVisibility = () => {
-                    console.log("Valeur de", selectField.name, "=", selectField.value);
-                    if (selectField.value === "Autre") {
-                        container.style.display = "block";
-                    } else {
-                        container.style.display = "none";
-                        const input = container.querySelector("input");
-                        if (input) input.value = "";
-                    }
-                };
-
-                if (selectField && container) {
-                    checkVisibility();
-                    selectField.addEventListener("change", checkVisibility);
-                }
-            };
-
-        toggleField(document.querySelector("[name='animal[species]']"), "customSpeciesContainer");
-        toggleField(document.querySelector("[name='animal[description]']"), "customDescriptionContainer");
-        });
-    </script>
-{% endblock %}

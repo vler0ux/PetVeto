@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau vétérinaire - PetVeto{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">➕ Ajouter un nouveau vétérinaire</h1>
+
+    {% for label in ['veto_success', 'veto_error'] %}
+        {% for message in app.flashes(label) %}
+            <div class="alert alert-{{ label == 'veto_success' ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(form) }}
+
+    <div class="mb-3">
+        {{ form_row(form.firstname) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.lastname) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.email) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.plainPassword,) }}
+    </div>
+
+    <div class="d-flex gap-2 mt-3 mb-3">
+        <button type="submit" class="btn btn-primary">✅ Enregistrer le vétérinaire</button>
+        <a href="{{ path('app_veto_home') }}" class="btn btn-secondary">⬅️ Retour à l'accueil</a>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}
