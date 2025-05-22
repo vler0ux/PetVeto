@@ -41,6 +41,7 @@ final class VetoFactory extends PersistentProxyObjectFactory
             'firstname' => self::faker()->firstName(),
             'lastname' => self::faker()->lastName(),
             'password' => 'mdp123456',
+            'roles' => ['ROLE_VETO'],
         ];
     }
 

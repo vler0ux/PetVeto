@@ -46,6 +46,7 @@ final class UserFactory extends PersistentProxyObjectFactory
             'rue' => self::faker()->streetAddress(),
             'codepostal' => self::faker()->postcode(),
             'ville' => self::faker()->city(),
+            'roles' => ['ROLE_USER'],
         ];
     }
 
